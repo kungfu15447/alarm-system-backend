@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Primitives;
@@ -34,6 +35,12 @@ namespace Test
             var context = new DefaultHttpContext();
             var request = context.Request;
             request.Query = new QueryCollection(CreateDictionary(queryStringKey, queryStringValue));
+            return request;
+        }
+
+        public static HttpRequest CreateHttpRequest() {
+            var context = new DefaultHttpContext();
+            var request = context.Request;
             return request;
         }
 
