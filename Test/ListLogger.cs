@@ -2,7 +2,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 
-namespace Test
+namespace AlarmSystem.Test
 {
     public class ListLogger : ILogger
     {

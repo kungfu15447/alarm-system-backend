@@ -2,7 +2,9 @@ using System.Threading.Tasks;
 using AlarmSystem.Functions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using AlarmSystem.Test.Utils;
 using Xunit;
+
 namespace AlarmSystem.Test.Functions
 {
     public class HttpExampleTest 
