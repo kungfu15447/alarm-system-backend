@@ -2,8 +2,12 @@ language: csharp
 mono: none
 dotnet: 3.0.100
 install:
-  - dotnet restore src/alarm-system-backend.csproj
+  - dotnet restore functions/alarm-system-backend.csproj
+  - dotnet restore core/core.csproj
+  - dotnet restore infrastructure/infrastructure.csproj
   - dotnet restore Test/Test.csproj
 script:
-  - dotnet build src/alarm-system-backend.csproj
+  - dotnet build functions/alarm-system-backend.csproj
+  - dotnet build core/core.csproj
+  - dotnet build infrastructure/infrastructure.csproj
   - dotnet test Test/Test.csproj
