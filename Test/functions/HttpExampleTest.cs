@@ -3,8 +3,8 @@ using AlarmSystem.Functions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Xunit;
-
-namespace Test.Functions {
+namespace Test.Functions
+{
     public class HttpExampleTest 
     {
         private readonly ILogger logger = TestFactory.CreateLogger();
