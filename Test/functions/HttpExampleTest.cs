@@ -16,7 +16,7 @@ namespace Test.Functions
             var req = new HttpRequestBuilder().Query("name", "billy").Build();
 
             //When
-            var res = await HttpExample.Run(req, logger);
+            var res = await new HttpExample().Run(req, logger);
 
             //Then
             Assert.IsType<OkObjectResult>(res);
@@ -37,7 +37,7 @@ namespace Test.Functions
             var req = new HttpRequestBuilder().Body(body).Build();
 
             //When
-            var res = (OkObjectResult)await HttpExample.Run(req, logger);
+            var res = (OkObjectResult)await new HttpExample().Run(req, logger);
 
             //Then
             Assert.Equal($"Hello, {name}. This HTTP triggered function executed successfully.", res.Value);
@@ -56,7 +56,7 @@ namespace Test.Functions
             var req = new HttpRequestBuilder().Query("name", name).Build();
 
             //When
-            var res = (OkObjectResult)await HttpExample.Run(req, logger);
+            var res = (OkObjectResult)await new HttpExample().Run(req, logger);
 
             //Then
             Assert.Equal($"Hello, {name}. This HTTP triggered function executed successfully.", res.Value);
@@ -68,7 +68,7 @@ namespace Test.Functions
             //Given
             var req = new HttpRequestBuilder().Build();
             //When
-            var res = (OkObjectResult)await HttpExample.Run(req, logger);
+            var res = (OkObjectResult)await new HttpExample().Run(req, logger);
 
             //Then
             Assert.Equal("This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.", res.Value);
