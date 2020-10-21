@@ -1,9 +1,10 @@
-using core.domain;
+using AlarmSystem.Core.Application;
+using AlarmSystem.Core.Domain;
 
-namespace infrastructure.repositories
+namespace AlarmSystem.Infrastructure.Repositories
 {
     public class MachineRepository : IMachineRepository
     {
-        
+        private IMachineService machine;
     }
 }

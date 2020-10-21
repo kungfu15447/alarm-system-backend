@@ -3,7 +3,7 @@ using AlarmSystem.Functions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Xunit;
-namespace Test.Functions
+namespace AlarmSystem.Test.Functions
 {
     public class HttpExampleTest 
     {

@@ -1,7 +1,7 @@
-using core.application;
-using core.application.implementation;
-using core.domain;
-using infrastructure.repositories;
+using AlarmSystem.Core.Application;
+using AlarmSystem.Core.Application.Implementation;
+using AlarmSystem.Core.Domain;
+using AlarmSystem.Infrastructure.Repositories;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
