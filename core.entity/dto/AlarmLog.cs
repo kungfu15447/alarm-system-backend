@@ -1,6 +1,7 @@
 namespace AlarmSystem.Core.Entity.Dto {
     public class AlarmLog
     {
+        public int Id { get; set; }
         public string MachindId { get; set; }
         public Machine Machine { get; set; }
         public string AlarmId { get; set; }
