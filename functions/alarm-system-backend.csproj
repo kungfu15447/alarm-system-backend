@@ -5,7 +5,9 @@
     <RootNamespace>alarm_system_backend</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.7" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.7"/>
+    <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0"/>
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.9"/>
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
@@ -15,5 +17,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../core/core.csproj"/>
+    <ProjectReference Include="../core.entity/core.entity.csproj"/>
+    <ProjectReference Include="../infrastructure/infrastructure.csproj"/>
   </ItemGroup>
 </Project>

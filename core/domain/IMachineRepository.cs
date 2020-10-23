@@ -1,4 +1,4 @@
-namespace core.domain
+namespace AlarmSystem.Core.Domain
 {
     public interface IMachineRepository
     {

@@ -1,7 +1,7 @@
-namespace core.application
+namespace AlarmSystem.Core.Application
 {
     public interface IMachineService
     {
-         
+
     }
 }

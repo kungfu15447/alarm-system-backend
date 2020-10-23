@@ -10,10 +10,12 @@ using Newtonsoft.Json;
 
 namespace AlarmSystem.Functions
 {
-    public static class HttpExample
+    public class HttpExample
     {
+        public HttpExample() {}
+
         [FunctionName("HttpExample")]
-        public static async Task<IActionResult> Run(
+        public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
@@ -28,7 +30,7 @@ namespace AlarmSystem.Functions
             string responseMessage = string.IsNullOrEmpty(name)
                 ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
                 : $"Hello, {name}. This HTTP triggered function executed successfully.";
-
+    
             return new OkObjectResult(responseMessage);
         }
     }

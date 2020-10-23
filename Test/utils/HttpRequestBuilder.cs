@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 
-namespace Test {
+namespace AlarmSystem.Test.Utils {
     public class HttpRequestBuilder {
         private Dictionary<string, StringValues> query;
         private object body;

@@ -1,4 +1,4 @@
-namespace Test
+namespace AlarmSystem.Test
 {
     public enum LoggerTypes
     {
