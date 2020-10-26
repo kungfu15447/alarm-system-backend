@@ -8,40 +8,21 @@ namespace AlarmSystem.Infrastructure {
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
             modelBuilder.Entity<Alarm>()
-                .HasKey(a => a.AlarmId)
-                .HasName("Id");
+                .Property(a => a.AlarmId)
+                .HasColumnName("Id");
 
             modelBuilder.Entity<Machine>()
-                .HasKey(m => m.MachineId)
-                .HasName("Id");
+                .Property(m => m.MachineId)
+                .HasColumnName("Id");
             
             modelBuilder.Entity<AlarmLog>()
-                .HasKey(al => new { al.Alarm, al.Machine, al.Date })
-                .HasName("Id");
+                .HasKey(al => new { al.AlarmId, al.MachineId, al.Date });
 
             modelBuilder.Entity<AlarmWatch>()
-                .HasKey(aw => new { aw.Alarm, aw.WatchId })
-                .HasName("Id");
+                .HasKey(aw => new { aw.AlarmId, aw.WatchId });
 
             modelBuilder.Entity<MachineWatch>()
-                .HasKey(mw => new { mw.Machine, mw.WatchId })
-                .HasName("Id");
-            
-            modelBuilder.Entity<AlarmLog>()
-                .HasOne(al => al.Alarm)
-                .WithOne();
-            
-            modelBuilder.Entity<AlarmLog>()
-                .HasOne(al => al.Machine)
-                .WithOne();
-            
-            modelBuilder.Entity<AlarmWatch>()
-                .HasOne(aw => aw.Alarm)
-                .WithOne();
-
-            modelBuilder.Entity<MachineWatch>()
-                .HasOne(mw => mw.Machine)
-                .WithOne();
+                .HasKey(mw => new { mw.MachineId, mw.WatchId });
         }
 
         public DbSet<Alarm> Alarms { get; set; }
