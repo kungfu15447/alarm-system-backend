@@ -4,14 +4,6 @@
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
     <RootNamespace>alarm_system_backend</RootNamespace>
   </PropertyGroup>
-  <Target Name="CopyDll" AfterTargets="Build">
-    <ItemGroup>
-      <MockFile Include="$(ProjectDir)..\functions\bin\Debug\netcoreapp3.0\bin\alarm-system-backend.dll" />
-    </ItemGroup>
-    <Copy 
-        SourceFiles="@(MockFile)" 
-        DestinationFolder="$(ProjectDir)..\functions\bin\Debug\netcoreapp3.0" />
-  </Target>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.7"/>
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0"/>
