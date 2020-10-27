@@ -1,10 +1,18 @@
-using AlarmSystem.Core.Application;
 using AlarmSystem.Core.Domain;
+using AlarmSystem.Core.Entity.Dto;
 
 namespace AlarmSystem.Infrastructure.Repositories
 {
     public class MachineRepository : IMachineRepository
     {
-        private IMachineService machine;
+        public MachineRepository()
+        {
+
+        }
+
+        public void CreateMachine(Machine machine)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
