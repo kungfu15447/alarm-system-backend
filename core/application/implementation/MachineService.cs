@@ -1,4 +1,6 @@
+using System;
 using AlarmSystem.Core.Domain;
+using AlarmSystem.Core.Entity.Dto;
 
 namespace AlarmSystem.Core.Application.Implementation
 {
@@ -11,7 +13,9 @@ namespace AlarmSystem.Core.Application.Implementation
         }
         public void CreateMachine()
         {
-            throw new System.NotImplementedException();
+            Guid guid = Guid.NewGuid();
+            Machine machine = new Machine { MachineId = guid.ToString() };
+            _machineRepo.CreateMachine(machine);
         }
     }
 }

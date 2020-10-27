@@ -5,14 +5,16 @@ namespace AlarmSystem.Infrastructure.Repositories
 {
     public class MachineRepository : IMachineRepository
     {
-        public MachineRepository()
+        private SystemContext _ctx;
+        public MachineRepository(SystemContext ctx)
         {
-
+            _ctx = ctx;
         }
 
         public void CreateMachine(Machine machine)
         {
-            throw new System.NotImplementedException();
+            _ctx.Machines.Add(machine);
+            _ctx.SaveChanges();
         }
     }
 }
