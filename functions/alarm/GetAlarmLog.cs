@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using AlarmSystem.Core.Entity.Dto;
+using core.application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -9,15 +12,17 @@ namespace functions.alarm
 {
     public class GetAlarmLog
     {
-        public GetAlarmLog() {}
+        private IAlarmService _alarmService;
+        public GetAlarmLog(IAlarmService alarmService) {
+            _alarmService = alarmService;
+        }
 
         [FunctionName("GetAlarmLog")]
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+        public async Task<List<AlarmLog>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log) {
-                
-                
-                
-                return OkObjectResult();
+
+                List<AlarmLog> alarmLog =  _alarmService.GetAlarmLog();
+                return alarmLog;
         }
     }
 }

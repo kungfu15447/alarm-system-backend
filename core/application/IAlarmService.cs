@@ -1,7 +1,11 @@
+using System;
+using System.Collections.Generic;
+using AlarmSystem.Core.Entity.Dto;
+
 namespace core.application
 {
-    public class IAlarmService
+    public interface IAlarmService
     {
-        
+         List<AlarmLog> GetAlarmLog();
     }
 }
