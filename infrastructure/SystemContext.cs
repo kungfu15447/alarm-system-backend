@@ -14,15 +14,27 @@ namespace AlarmSystem.Infrastructure {
             modelBuilder.Entity<Machine>()
                 .Property(m => m.MachineId)
                 .HasColumnName("Id");
+
+            modelBuilder.Entity<AlarmLog>()
+                .Property<int>("AlarmId");
+
+            modelBuilder.Entity<AlarmLog>()
+                .Property<string>("MachineId");
             
             modelBuilder.Entity<AlarmLog>()
-                .HasKey(al => new { al.AlarmId, al.MachineId, al.Date });
+                .HasKey(new string [] { "AlarmId", "MachineId", "Date" });
+            
+            modelBuilder.Entity<AlarmWatch>()
+                .Property<int>("AlarmId");
 
             modelBuilder.Entity<AlarmWatch>()
-                .HasKey(aw => new { aw.AlarmId, aw.WatchId });
+                .HasKey(new string [] { "AlarmId", "WatchId" });
 
             modelBuilder.Entity<MachineWatch>()
-                .HasKey(mw => new { mw.MachineId, mw.WatchId });
+                .Property<string>("MachineId");
+
+            modelBuilder.Entity<MachineWatch>()
+                .HasKey(new string [] { "MachineId", "WatchId" });
         }
 
         public DbSet<Alarm> Alarms { get; set; }
