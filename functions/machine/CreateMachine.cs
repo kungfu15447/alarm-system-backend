@@ -5,6 +5,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using AlarmSystem.Core.Application;
+using System.Collections.Generic;
 
 namespace AlarmSystem.Functions.Machine
 {
@@ -21,8 +22,13 @@ namespace AlarmSystem.Functions.Machine
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "machines")] HttpRequest req,
             ILogger log)
         {
-            _machineService.CreateMachine();
-            return new OkResult();
+            List<AlarmSystem.Core.Entity.Dto.Machine> machines = _machineService.GetMachines();
+
+            if (machines.Count == 0) {
+                return new NoContentResult();
+            }
+            
+            return new OkObjectResult(machines);
         }
     }
 }
