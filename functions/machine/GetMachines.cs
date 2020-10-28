@@ -16,13 +16,18 @@ namespace AlarmSystem.Functions.Machine
             _machineService = machineService;
         }
 
-        [FunctionName("CreateMachine")]
+        [FunctionName("GetMachines")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "machines")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "machines")] HttpRequest req,
             ILogger log)
         {
-            _machineService.CreateMachine();
-            return new OkResult();
+            List<AlarmSystem.Core.Entity.Dto.Machine> machines = _machineService.GetMachines();
+
+            if (machines.Count == 0) {
+                return new NoContentResult();
+            }
+
+            return new OkObjectResult(machines);
         }
     }
 }
