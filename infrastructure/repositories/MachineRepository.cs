@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
 
@@ -20,7 +21,7 @@ namespace AlarmSystem.Infrastructure.Repositories
 
         public List<Machine> ReadAllMachines()
         {
-            throw new System.NotImplementedException();
+            return _ctx.Machines.ToList();
         }
     }
 }

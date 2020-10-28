@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +12,7 @@ namespace AlarmSystem.Functions.Machine
     public class GetMachines
     {
         private IMachineService _machineService;
+        
         public GetMachines(IMachineService machineService)
         {
             _machineService = machineService;

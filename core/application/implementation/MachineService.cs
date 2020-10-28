@@ -21,7 +21,7 @@ namespace AlarmSystem.Core.Application.Implementation
 
         public List<Machine> GetMachines()
         {
-            throw new NotImplementedException();
+            return _machineRepo.ReadAllMachines();
         }
     }
 }

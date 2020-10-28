@@ -18,7 +18,7 @@ namespace AlarmSystem.Functions.Machine
 
         [FunctionName("CreateMachine")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "machines")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "machines")] HttpRequest req,
             ILogger log)
         {
             _machineService.CreateMachine();
