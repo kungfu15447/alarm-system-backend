@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
 
@@ -15,6 +17,11 @@ namespace AlarmSystem.Infrastructure.Repositories
         {
             _ctx.Machines.Add(machine);
             _ctx.SaveChanges();
+        }
+
+        public List<Machine> ReadAllMachines()
+        {
+            return _ctx.Machines.ToList();
         }
     }
 }
