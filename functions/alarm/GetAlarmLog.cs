@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Entity.Dto;
@@ -18,11 +19,11 @@ namespace functions.alarm
         }
 
         [FunctionName("GetAlarmLog")]
-        public async Task<List<AlarmLog>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "alarmlog")] HttpRequest req,
             ILogger log) {
-
+                
                 List<AlarmLog> alarmLog =  _alarmService.GetAlarmLog();
-                return alarmLog;
+                return new OkObjectResult(alarmLog);
         }
     }
 }
