@@ -14,6 +14,7 @@ namespace AlarmSystem.Test.Functions.alarm
     {
         private readonly ILogger logger = TestFactory.CreateLogger();
 
+        [Fact]
         public async void FunctionShouldCallAlarmServiceOnce() {
             //Given
             var req = new HttpRequestBuilder().Build();
@@ -29,6 +30,7 @@ namespace AlarmSystem.Test.Functions.alarm
             
         }
 
+        [Fact]
         public async void FucntionShouldReturnOkObjectResult()
         {
             //Given
