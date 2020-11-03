@@ -2,16 +2,16 @@ using System.Collections.Generic;
 using System.Linq;
 using AlarmSystem.Core.Entity.Dto;
 using AlarmSystem.Infrastructure;
-using core.domain;
 using Microsoft.EntityFrameworkCore;
+using AlarmSystem.Core.Domain;
 
 namespace infrastructure.repositories
 {
-    public class AlarmRepository : IAlarmRepository
+    public class AlarmLogRepository : IAlarmLogRepository
     {
         private SystemContext _ctx;
  
-        public AlarmRepository(SystemContext ctx) {
+        public AlarmLogRepository(SystemContext ctx) {
             _ctx = ctx;
         }
 

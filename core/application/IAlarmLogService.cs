@@ -4,7 +4,7 @@ using AlarmSystem.Core.Entity.Dto;
 
 namespace core.application
 {
-    public interface IAlarmService
+    public interface IAlarmLogService
     {
          List<AlarmLog> GetAlarmLog();
     }

@@ -18,15 +18,15 @@ namespace AlarmSystem.Test.Functions.alarm
         public async void FunctionShouldCallAlarmServiceOnce() {
             //Given
             var req = new HttpRequestBuilder().Build();
-            var alarmService = new Mock<IAlarmService>();
+            var alarmLogService = new Mock<IAlarmLogService>();
 
             //When
-            alarmService.Setup(ms => ms.GetAlarmLog());
+            alarmLogService.Setup(ms => ms.GetAlarmLog());
 
-            var res = await new GetAlarmLog(alarmService.Object).Run(req, logger);
+            var res = await new GetAlarmLog(alarmLogService.Object).Run(req, logger);
 
             //Then
-            alarmService.Verify(ms => ms.GetAlarmLog(), Times.Once());
+            alarmLogService.Verify(ms => ms.GetAlarmLog(), Times.Once());
             
         }
 
@@ -35,10 +35,10 @@ namespace AlarmSystem.Test.Functions.alarm
         {
             //Given
             var req = new HttpRequestBuilder().Build();
-            var alarmService = new Mock<IAlarmService>();
+            var alarmLogService = new Mock<IAlarmLogService>();
 
             //When
-            var res = (OkObjectResult)await new GetAlarmLog(alarmService.Object).Run(req, logger);
+            var res = (OkObjectResult)await new GetAlarmLog(alarmLogService.Object).Run(req, logger);
 
             //Then
             Assert.IsType<OkObjectResult>(res);
