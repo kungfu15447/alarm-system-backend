@@ -31,7 +31,7 @@ namespace AlarmSystem.Test.Functions.alarm
         }
 
         [Fact]
-        public async void FucntionShouldReturnOkObjectResult()
+        public async void FunctionShouldReturnOkObjectResult()
         {
             //Given
             var req = new HttpRequestBuilder().Build();
