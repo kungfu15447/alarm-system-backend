@@ -15,7 +15,7 @@ namespace AlarmSystem.Test.Functions.alarm
         private readonly ILogger logger = TestFactory.CreateLogger();
 
         [Fact]
-        public async void FunctionShouldCallAlarmServiceOnce() {
+        public async void FunctionShouldCallAlarmLogServiceOnce() {
             //Given
             var req = new HttpRequestBuilder().Build();
             var alarmLogService = new Mock<IAlarmLogService>();

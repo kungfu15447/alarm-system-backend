@@ -13,8 +13,8 @@ namespace functions.alarm
 {
     public class GetAlarmLog
     {
-        private IAlarmService _alarmService;
-        public GetAlarmLog(IAlarmService alarmService) {
+        private IAlarmLogService _alarmService;
+        public GetAlarmLog(IAlarmLogService alarmService) {
             _alarmService = alarmService;
         }
 

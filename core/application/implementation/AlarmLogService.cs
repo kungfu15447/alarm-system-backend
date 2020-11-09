@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using AlarmSystem.Core.Entity.Dto;
-using core.domain;
+using core.application;
+using AlarmSystem.Core.Domain;
 
-namespace core.application.implementation
+namespace AlarmSystem.Core.Application.Implementation
 {
-    public class AlarmService : IAlarmService
+    public class AlarmLogService : IAlarmLogService
     {
-        private IAlarmRepository _alarmRepository;
+        private IAlarmLogRepository _alarmRepository;
 
-        public AlarmService(IAlarmRepository alarmRepository) {
+        public AlarmLogService(IAlarmLogRepository alarmRepository) {
             _alarmRepository = alarmRepository;
         }
 
