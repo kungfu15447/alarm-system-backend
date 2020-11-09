@@ -18,6 +18,11 @@ namespace AlarmSystem.Functions.Notfification
 
         }
 
+        //TODO Create alarm log
+        //TODO Get alarm subscriptions
+        //TODO Get machine subscriptions
+        //TODO Send notifications to only subscribed individuals
+        //TODO Return different results depending on if it send any notifications or not
         [FunctionName("SendAlert")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "notify")] HttpRequest req,
@@ -25,8 +30,15 @@ namespace AlarmSystem.Functions.Notfification
         {
             string accessSignature = Environment.GetEnvironmentVariable("DefaultFullSharedAccessSignature");
             string hubName = Environment.GetEnvironmentVariable("NotificationHubName");
-            //TODO Create alarm log
+
             NotificationHubClient hub = new NotificationHubClient(accessSignature, hubName);
+
+            Notification nof = new FcmNotification("{\"data\":{\"message\":\"This is for my friend\"}}");
+
+
+            //TODO Should be replaced with tokens machine/alarm subscriptions!
+            string watchToken = Environment.GetEnvironmentVariable("EmulatorWatchToken");
+            await hub.SendDirectNotificationAsync(nof,watchToken);
 
             return new OkResult();
         }
