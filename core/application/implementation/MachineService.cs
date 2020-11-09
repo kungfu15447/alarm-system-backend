@@ -18,7 +18,7 @@ namespace AlarmSystem.Core.Application.Implementation
             Machine machine = new Machine { MachineId = guid.ToString() };
             _machineRepo.CreateMachine(machine);
         }
-
+            
         public List<Machine> GetMachines()
         {
             return _machineRepo.ReadAllMachines();
