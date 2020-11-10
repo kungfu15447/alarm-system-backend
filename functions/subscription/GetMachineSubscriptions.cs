@@ -9,7 +9,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 
-namespace AlarmSystem.Functions.Subscriptions
+namespace AlarmSystem.Functions.Subscription
 {
     public class GetMachineSubscriptions
     {
