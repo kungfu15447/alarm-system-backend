@@ -7,6 +7,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace AlarmSystem.Functions.Watch {
 
@@ -21,11 +22,8 @@ namespace AlarmSystem.Functions.Watch {
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "subscribeToAlarm")] HttpRequest req,
             ILogger log) 
             {
-                string requestString = await req.ReadAsStringAsync();
-                string requestJsonString = JsonConvert.SerializeObject(requestString);
-                AlarmWatch aw = JsonConvert.DeserializeObject<AlarmWatch>(requestJsonString);
-
-
+                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                AlarmWatch aw = JsonConvert.DeserializeObject<AlarmWatch>(requestBody);
                 _watchservice.SubscribeToAlarm(aw);
                 return new OkResult();
             }
