@@ -16,8 +16,8 @@ namespace AlarmSystem.Functions.Subscriptions
 
         [FunctionName("GetMachineSubscriptions")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "machinesubs")] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "machinesubs/{watchId}")] HttpRequest req,
+            ILogger log, string watchId)
         {
             return new OkResult();
         }
