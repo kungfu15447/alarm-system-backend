@@ -19,10 +19,10 @@ namespace AlarmSystem.Test.Functions.Subscription
         private readonly ILogger logger = TestFactory.CreateLogger();
 
         [Theory]
-        [InlineData("wadsdasda")]
-        [InlineData("reqium")]
-        [InlineData("StandoPowah")]
-        [InlineData("TestDataForTest")]
+        [InlineData("test-id-1")]
+        [InlineData("test-id-2")]
+        [InlineData("test-id-3")]
+        [InlineData("4")]
         public async Task TestFunctionReturnsResultOfTypeOkObjectResultAsync(string watchId)
         {
             //Given
@@ -34,9 +34,9 @@ namespace AlarmSystem.Test.Functions.Subscription
                 { 
                     Machine = new Core.Entity.Dto.Machine 
                     { 
-                        MachineId = "dasd"
+                        MachineId = "machine-id-1"
                     },
-                    WatchId = "sdasdaji"
+                    WatchId = "watch-id-1"
                 }
             };
 
@@ -55,7 +55,7 @@ namespace AlarmSystem.Test.Functions.Subscription
             //Given
             var req = new HttpRequestBuilder().Build();
             var mockService = new Mock<IWatchService>();
-            string watchId = "TestData";
+            string watchId = "watch-id-1";
             List<MachineWatch> subscriptions = new List<MachineWatch>();
 
             //When
@@ -73,7 +73,7 @@ namespace AlarmSystem.Test.Functions.Subscription
             //Given
             var req = new HttpRequestBuilder().Build();
             var mockService = new Mock<IWatchService>();
-            string watchId = "TestData";
+            string watchId = "watch-id-1";
 
             //When
             mockService.Setup(ms => ms.GetMachineSubscriptionsFromWatch(It.IsAny<string>())).Throws<InvalidDataException>();
@@ -90,7 +90,7 @@ namespace AlarmSystem.Test.Functions.Subscription
             //Given
             var req = new HttpRequestBuilder().Build();
             var mockService = new Mock<IWatchService>();
-            string watchId = "TestData";
+            string watchId = "watch-id-1";
 
             //When
             mockService.Setup(ms => ms.GetMachineSubscriptionsFromWatch(It.IsAny<string>())).Throws<InvalidDataException>();
@@ -107,7 +107,7 @@ namespace AlarmSystem.Test.Functions.Subscription
             //Given
             var req = new HttpRequestBuilder().Build();
             var mockService = new Mock<IWatchService>();
-            string watchId = "TestData";
+            string watchId = "watch-id-1";
             List<MachineWatch> subscriptions = new List<MachineWatch>();
 
             //When

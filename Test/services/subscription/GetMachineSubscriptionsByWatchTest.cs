@@ -16,7 +16,7 @@ namespace AlarmSystem.Test.Services.Subscription
             //Given
             var mockRepo = new Mock<IWatchRepository>();
             var service = new WatchService(mockRepo.Object);
-            var watchId = "sadasd";
+            var watchId = "watch-id-1";
 
             //When
             mockRepo.Setup(mr => mr.ReadAllMachineSubscriptionsByWatch(It.IsAny<string>())).Returns(It.IsAny<List<MachineWatch>>());
