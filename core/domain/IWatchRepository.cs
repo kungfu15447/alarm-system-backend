@@ -7,5 +7,6 @@ namespace AlarmSystem.Core.Domain
     {
         List<MachineWatch> ReadAllMachineSubscriptionsByWatch(string watchId);
         List<MachineWatch> ReadAllMachineSubscriptionsByMachine(string machineId);
+        List<AlarmWatch> ReadAllAlarmSubscriptionsByAlarmCode(int alarmCode);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
+using AlarmSystem.Core.Entity.Dto;
 using AlarmSystem.Core.Entity.Functions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,10 +24,8 @@ namespace AlarmSystem.Functions.Notfification
         }
 
         //TODO Create alarm log
-        //TODO Get alarm subscriptions
-        //TODO Get machine subscriptions
-        //TODO Send notifications to only subscribed individuals
-        //TODO Return different results depending on if it send any notifications or not
+        //TODO Test to see if function works
+        //TODO Optimize way to find all watches that needs a notification send
         [FunctionName("SendAlert")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "notify")] HttpRequest req,
@@ -35,6 +34,8 @@ namespace AlarmSystem.Functions.Notfification
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             SendAlertModel sam = JsonConvert.DeserializeObject<SendAlertModel>(requestBody);
 
+            List<string> watches = GetWatchesToNotify(sam);
+
             string accessSignature = Environment.GetEnvironmentVariable("DefaultFullSharedAccessSignature");
             string hubName = Environment.GetEnvironmentVariable("NotificationHubName");
 
@@ -42,9 +43,13 @@ namespace AlarmSystem.Functions.Notfification
 
             Notification nof = new FcmNotification(MakeJsonPayload(sam));
 
-            //TODO Should be replaced with tokens machine/alarm subscriptions!
-            string watchToken = Environment.GetEnvironmentVariable("EmulatorWatchToken");
-            await hub.SendDirectNotificationAsync(nof, watchToken);
+            if (watches.Count == 0) {
+                return new NoContentResult();
+            }
+
+            foreach (string watch in watches) {
+                await hub.SendDirectNotificationAsync(nof, watch);
+            }
 
             return new OkResult();
         }
@@ -54,6 +59,31 @@ namespace AlarmSystem.Functions.Notfification
             string errorMessage = $"The machine {sam.MachineId} has error {sam.AlarmCode}!";
             string jsonPayload = JsonConvert.SerializeObject(new {data = new { message = errorMessage } });
             return jsonPayload;
+        }
+
+        private List<string> GetWatchesToNotify(SendAlertModel sam)
+        {
+            List<string> watches = new List<string>();
+            List<MachineWatch> machineSubscriptions = _watchService.GetMachineSubscriptionsByMachine(sam.MachineId);
+            List<AlarmWatch> alarmSubscriptions = _watchService.GetAlarmSubscriptionsByAlarmCode(sam.AlarmCode);
+
+            foreach(MachineWatch mw in machineSubscriptions)
+            {
+                watches.Add(mw.WatchId);
+            }
+
+            //Since a watch can both be subscribed to a machine and an alarm. We don't want to send the same notification twice to one watch
+            //This should probably be optimised so we can combine the two subscriptions list without duplicates
+            foreach(AlarmWatch aw in alarmSubscriptions)
+            {
+                bool alreadyIn = watches.Contains(aw.WatchId);
+
+                if (!alreadyIn) 
+                {
+                    watches.Add(aw.WatchId);
+                }
+            }
+            return watches;
         }
     }
 }

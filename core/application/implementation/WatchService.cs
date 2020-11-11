@@ -12,6 +12,11 @@ namespace AlarmSystem.Core.Application.Implementation
             _watchRepo = watchRepo;
         }
 
+        public List<AlarmWatch> GetAlarmSubscriptionsByAlarmCode(int alarmCode)
+        {
+            return _watchRepo.ReadAllAlarmSubscriptionsByAlarmCode(alarmCode);
+        }
+
         public List<MachineWatch> GetMachineSubscriptionsByMachine(string machineId)
         {
             if (string.IsNullOrEmpty(machineId)) {
