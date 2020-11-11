@@ -12,6 +12,14 @@ namespace AlarmSystem.Core.Application.Implementation
             _watchRepo = watchRepo;
         }
 
+        public List<MachineWatch> GetMachineSubscriptionsByMachine(string machineId)
+        {
+            if (string.IsNullOrEmpty(machineId)) {
+                throw new InvalidDataException("Machine Id cannot be empty or non existent! Please include machine id");
+            }
+            return _watchRepo.ReadAllMachineSubscriptionsByMachine(machineId);
+        }
+
         public List<MachineWatch> GetMachineSubscriptionsFromWatch(string watchId)
         {
             if (string.IsNullOrEmpty(watchId)) {

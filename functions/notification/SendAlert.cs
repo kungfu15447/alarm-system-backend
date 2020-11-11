@@ -16,9 +16,10 @@ namespace AlarmSystem.Functions.Notfification
 {
     public class SendAlert 
     {
-        public SendAlert() 
+        private IWatchService _watchService;
+        public SendAlert(IWatchService watchService) 
         {
-
+            _watchService = watchService;
         }
 
         //TODO Create alarm log

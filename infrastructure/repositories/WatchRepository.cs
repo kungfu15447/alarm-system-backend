@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
+using Microsoft.EntityFrameworkCore;
 
 namespace AlarmSystem.Infrastructure.Repositories
 {
@@ -10,6 +11,12 @@ namespace AlarmSystem.Infrastructure.Repositories
         private SystemContext _ctx;
         public WatchRepository(SystemContext ctx) {
             _ctx = ctx;
+        }
+
+        public List<MachineWatch> ReadAllMachineSubscriptionsByMachine(string machineId)
+        {
+            List<MachineWatch> subscriptions = _ctx.MachineWatch.Include(mw => mw.Machine).Where(mw => mw.Machine.MachineId == machineId).ToList();
+            return subscriptions;
         }
 
         public List<MachineWatch> ReadAllMachineSubscriptionsByWatch(string watchId)
