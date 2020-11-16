@@ -92,8 +92,11 @@ namespace AlarmSystem.Functions.Notfification
         {
             Alarm alarm = _alarmService.GetAlarmByCode(sam.AlarmCode);
             AlarmSystem.Core.Entity.Dto.Machine machine = new AlarmSystem.Core.Entity.Dto.Machine() { MachineId = sam.MachineId };
-            
-            AlarmLog al = new AlarmLog() { Alarm = alarm, Machine = machine};
+            var date = DateTime.UtcNow;
+            long epochOfNow = new DateTimeOffset(date).ToUnixTimeMilliseconds();
+            AlarmLog al = new AlarmLog() { Alarm = alarm, Machine = machine, Date = epochOfNow };
+
+            //Should call backend and create Alarm Log
         }
     }
 }
