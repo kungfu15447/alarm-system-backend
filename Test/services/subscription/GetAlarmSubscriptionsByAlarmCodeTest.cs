@@ -5,12 +5,12 @@ using AlarmSystem.Core.Entity.Dto;
 using Moq;
 using Xunit;
 
-namespace AlarmSystem.Test.Functions.Subscription
+namespace AlarmSystem.Test.Services.Subscription
 {
     public class GetAlarmSubscriptionsByAlarmCodeTest
     {
         [Fact]
-        public void TestMethodShouldCallRepoMethodOnce()
+        public void TestServiceMethodShouldCallRepoMethodOnce()
         {
             //Given
             var mockRepo = new Mock<IWatchRepository>();
