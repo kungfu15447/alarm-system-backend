@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
+using AlarmSystem.Core.Application.Exception;
 using AlarmSystem.Core.Entity.Dto;
 using AlarmSystem.Core.Entity.Functions;
 using AlarmSystem.Functions.Notification.NotificationSettings;
@@ -39,14 +40,18 @@ namespace AlarmSystem.Functions.Notification
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             SendAlertModel sam = JsonConvert.DeserializeObject<SendAlertModel>(requestBody);
 
-            CreateAlarmLog(sam);
-
             List<string> watches = new List<string>();
+
             try 
             {
                 watches = GetWatchesToNotify(sam);
+                CreateAlarmLog(sam);
             }
             catch(InvalidDataException e)
+            {
+                return new BadRequestObjectResult(e.Message);
+            }
+            catch(EntityNotFoundException e)
             {
                 return new BadRequestObjectResult(e.Message);
             }

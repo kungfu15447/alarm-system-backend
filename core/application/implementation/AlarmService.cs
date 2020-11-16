@@ -1,3 +1,4 @@
+using AlarmSystem.Core.Application.Exception;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
 using System;
@@ -18,7 +19,7 @@ namespace AlarmSystem.Core.Application.Implementation
             if (alarm != null) {
                 return alarm; 
             } else {
-                throw new NullReferenceException("Alarm was not found in database!");
+                throw new EntityNotFoundException("Could not find entity in database!");
             }
         }
     }
