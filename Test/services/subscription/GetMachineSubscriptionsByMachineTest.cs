@@ -29,7 +29,7 @@ namespace AlarmSystem.Test.Services.Subscription
         [Theory]
         [InlineData("")]
         [InlineData(null)]
-        public void TestRepoShouldNotBeCalledIfWatchIdIsNullOrEmpty(string machineId)
+        public void TestRepoShouldNotBeCalledIfMachineIdIsNullOrEmpty(string machineId)
         {
             //Given
             var mockRepo = new Mock<IWatchRepository>();
