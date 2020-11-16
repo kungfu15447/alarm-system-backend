@@ -15,7 +15,7 @@ namespace AlarmSystem.Test.Functions.Subscription
             //Given
             var mockRepo = new Mock<IWatchRepository>();
             var service = new WatchService(mockRepo.Object);
-            var alarmCode = 42;
+            var alarmCode = 1;
 
             //When
             mockRepo.Setup(mr => mr.ReadAllAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(It.IsAny<List<AlarmWatch>>());
