@@ -26,6 +26,8 @@ namespace AlarmSystem.Functions {
             builder.Services.AddScoped<IMachineRepository, MachineRepository>();
             builder.Services.AddScoped<IWatchService, WatchService>();
             builder.Services.AddScoped<IWatchRepository, WatchRepository>();
+            builder.Services.AddScoped<IAlarmService, AlarmService>();
+            builder.Services.AddScoped<IAlarmRepository, AlarmRepository>();
         }
     }
 }

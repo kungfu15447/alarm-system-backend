@@ -18,9 +18,11 @@ namespace AlarmSystem.Functions.Notfification
     public class SendAlert 
     {
         private IWatchService _watchService;
-        public SendAlert(IWatchService watchService) 
+        private IAlarmService _alarmService;
+        public SendAlert(IWatchService watchService, IAlarmService alarmService) 
         {
             _watchService = watchService;
+            _alarmService = alarmService;
         }
 
         //TODO Create alarm log
@@ -84,6 +86,14 @@ namespace AlarmSystem.Functions.Notfification
                 }
             }
             return watches;
+        }
+
+        private void CreateAlarmLog(SendAlertModel sam)
+        {
+            Alarm alarm = _alarmService.GetAlarmByCode(sam.AlarmCode);
+            AlarmSystem.Core.Entity.Dto.Machine machine = new AlarmSystem.Core.Entity.Dto.Machine() { MachineId = sam.MachineId };
+            
+            AlarmLog al = new AlarmLog() { Alarm = alarm, Machine = machine};
         }
     }
 }
