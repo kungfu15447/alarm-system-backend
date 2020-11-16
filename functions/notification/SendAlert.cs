@@ -30,11 +30,13 @@ namespace AlarmSystem.Functions.Notfification
         //TODO Optimize way to find all watches that needs a notification send
         [FunctionName("SendAlert")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "notify")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "notify")] HttpRequest req,
             ILogger log)
         {
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             SendAlertModel sam = JsonConvert.DeserializeObject<SendAlertModel>(requestBody);
+
+            CreateAlarmLog(sam);
 
             List<string> watches = GetWatchesToNotify(sam);
 
