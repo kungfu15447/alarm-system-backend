@@ -41,7 +41,15 @@ namespace AlarmSystem.Functions.Notification
 
             CreateAlarmLog(sam);
 
-            List<string> watches = GetWatchesToNotify(sam);
+            List<string> watches = new List<string>();
+            try 
+            {
+                watches = GetWatchesToNotify(sam);
+            }
+            catch(InvalidDataException e)
+            {
+                return new BadRequestObjectResult(e.Message);
+            }
 
             string accessSignature = Environment.GetEnvironmentVariable("DefaultFullSharedAccessSignature");
             string hubName = Environment.GetEnvironmentVariable("NotificationHubName");

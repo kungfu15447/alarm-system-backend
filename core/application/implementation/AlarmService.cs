@@ -1,5 +1,6 @@
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
+using System;
 
 namespace AlarmSystem.Core.Application.Implementation
 {
@@ -12,7 +13,13 @@ namespace AlarmSystem.Core.Application.Implementation
         }
         public Alarm GetAlarmByCode(int alarmCode)
         {
-            return _alarmRepo.ReadAlarmByCode(alarmCode);
+            Alarm alarm = _alarmRepo.ReadAlarmByCode(alarmCode);
+
+            if (alarm != null) {
+                return alarm; 
+            } else {
+                throw new NullReferenceException("Alarm was not found in database!");
+            }
         }
     }
 }

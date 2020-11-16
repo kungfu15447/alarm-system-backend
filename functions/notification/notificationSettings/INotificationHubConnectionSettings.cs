@@ -4,6 +4,6 @@ namespace AlarmSystem.Functions.Notification.NotificationSettings
 {
     public interface INotificationHubConnectionSettings
     {
-        NotificationHubClient Hub { get; set; }
+        INotificationHubClient Hub { get; set; }
     }
 }
