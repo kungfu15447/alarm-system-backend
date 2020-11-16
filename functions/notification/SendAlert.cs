@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
 using AlarmSystem.Core.Entity.Dto;
 using AlarmSystem.Core.Entity.Functions;
+using AlarmSystem.Functions.Notification.NotificationSettings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.NotificationHubs;
@@ -13,14 +14,16 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace AlarmSystem.Functions.Notfification
+namespace AlarmSystem.Functions.Notification
 {
     public class SendAlert 
     {
         private IWatchService _watchService;
         private IAlarmService _alarmService;
-        public SendAlert(IWatchService watchService, IAlarmService alarmService) 
+        private readonly INotificationHubClient _hub;
+        public SendAlert(IWatchService watchService, IAlarmService alarmService, INotificationHubConnectionSettings hub) 
         {
+            _hub = hub.Hub;
             _watchService = watchService;
             _alarmService = alarmService;
         }
@@ -43,16 +46,14 @@ namespace AlarmSystem.Functions.Notfification
             string accessSignature = Environment.GetEnvironmentVariable("DefaultFullSharedAccessSignature");
             string hubName = Environment.GetEnvironmentVariable("NotificationHubName");
 
-            NotificationHubClient hub = new NotificationHubClient(accessSignature, hubName);
-
-            Notification nof = new FcmNotification(MakeJsonPayload(sam));
+            Microsoft.Azure.NotificationHubs.Notification nof = new FcmNotification(MakeJsonPayload(sam));
 
             if (watches.Count == 0) {
                 return new NoContentResult();
             }
 
             foreach (string watch in watches) {
-                await hub.SendDirectNotificationAsync(nof, watch);
+                await _hub.SendDirectNotificationAsync(nof, watch);
             }
 
             return new OkResult();
