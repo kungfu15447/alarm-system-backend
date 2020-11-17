@@ -23,8 +23,9 @@ namespace AlarmSystem.Infrastructure.Repositories
 
         public void SubscribeToAlarm(AlarmWatch aw)
         {
-                _ctx.AlarmWatch.Add(aw);
-                _ctx.SaveChanges();
+            
+            _ctx.AlarmWatch.Add(aw);
+            _ctx.SaveChanges();
 		}
 		
 		public List<MachineWatch> ReadAllMachineSubscriptionsByWatch(string watchId)

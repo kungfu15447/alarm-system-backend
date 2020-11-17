@@ -18,7 +18,18 @@ namespace AlarmSystem.Core.Application.Implementation
             Machine machine = new Machine { MachineId = guid.ToString() };
             _machineRepo.CreateMachine(machine);
         }
-            
+
+        public Machine GetMachineById(string id)
+        {
+            Machine machine =  _machineRepo.ReadMachineById(id);
+
+            if(machine != null) {
+                return machine;
+            } else {
+                throw new Exception($"No machine was found with id: {id}");
+            }
+        }
+
         public List<Machine> GetMachines()
         {
             return _machineRepo.ReadAllMachines();

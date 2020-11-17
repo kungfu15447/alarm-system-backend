@@ -12,9 +12,9 @@ namespace infrastructure.repositories
         public AlarmRepository(SystemContext ctx) {
             _ctx = ctx;
         }
-        public Alarm GetAlarmById(int id)
+        public Alarm ReadAlarmById(int id)
         {
-            return _ctx.Alarms.FirstOrDefault(lol => lol.AlarmId == id);
+            return _ctx.Alarms.FirstOrDefault(a => a.AlarmId == id);
         }
     }
 }

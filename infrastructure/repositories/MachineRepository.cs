@@ -23,5 +23,10 @@ namespace AlarmSystem.Infrastructure.Repositories
         {
             return _ctx.Machines.ToList();
         }
+
+        public Machine ReadMachineById(string id)
+        {
+            return _ctx.Machines.Where(m => m.MachineId == id).FirstOrDefault();
+        }
     }
 }

@@ -4,6 +4,6 @@ namespace AlarmSystem.Core.Domain
 {
     public interface IAlarmRepository
     {
-        Alarm GetAlarmById(int id);
+        Alarm ReadAlarmById(int id);
     }
 }
