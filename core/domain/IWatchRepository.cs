@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using AlarmSystem.Core.Entity.Dto;
 
-namespace core.domain
+namespace AlarmSystem.Core.Domain
 {
     public interface IWatchRepository
     {

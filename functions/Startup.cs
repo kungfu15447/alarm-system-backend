@@ -5,8 +5,6 @@ using AlarmSystem.Core.Domain;
 using AlarmSystem.Infrastructure;
 using AlarmSystem.Infrastructure.Repositories;
 using core.application;
-using core.application.implementation;
-using core.domain;
 using infrastructure.repositories;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +32,9 @@ namespace AlarmSystem.Functions {
 
             builder.Services.AddScoped<IWatchService, WatchService>();
             builder.Services.AddScoped<IWatchRepository, WatchRepository>();
+
+            builder.Services.AddScoped<IAlarmService, AlarmService>();
+            builder.Services.AddScoped<IAlarmRepository, AlarmRepository>();
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AlarmSystem.Core.Application;
 using AlarmSystem.Core.Entity.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,14 +15,14 @@ namespace functions.alarm
         private IAlarmService _alarmService;
 
         public GetAlarmById(IAlarmService alarmService) {
-            _alarmService = alarmService;
+            _alarmService = alarmService;   
         }
 
         [FunctionName("GetAlarmById")]
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "AlarmById/{id}")] HttpRequest req,
-            ILogger log) {
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "GetAlarmById/{id}")] HttpRequest req,
+            ILogger log, int id ) {
                 
-                List<Alarm> alarm =  _alarmService.GetAlarmById();
+                Alarm alarm =  _alarmService.GetAlarmById(id);
                 return new OkObjectResult(alarm);
         }
     }

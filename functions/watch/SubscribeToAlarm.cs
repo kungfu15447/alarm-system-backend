@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using core.application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AlarmSystem.Core.Entity.Dto;
@@ -8,6 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.IO;
+using AlarmSystem.Core.Application;
 
 namespace AlarmSystem.Functions.Watch {
 

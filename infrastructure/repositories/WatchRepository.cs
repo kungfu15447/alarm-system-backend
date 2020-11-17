@@ -23,7 +23,6 @@ namespace AlarmSystem.Infrastructure.Repositories
 
         public void SubscribeToAlarm(AlarmWatch aw)
         {
-                
                 _ctx.AlarmWatch.Add(aw);
                 _ctx.SaveChanges();
 		}

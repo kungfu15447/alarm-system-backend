@@ -8,6 +8,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.IO;
+using AlarmSystem.Core.Application;
 
 namespace AlarmSystem.Functions.Watch {
 
