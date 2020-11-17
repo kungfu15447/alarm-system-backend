@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
 using AlarmSystem.Core.Application.Exception;
 using AlarmSystem.Core.Entity.Dto;
-using AlarmSystem.Core.Entity.Functions;
 using AlarmSystem.Functions.Notification.NotificationSettings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
