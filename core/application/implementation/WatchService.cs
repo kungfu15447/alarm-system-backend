@@ -16,7 +16,7 @@ namespace core.application.implementation
         }
 
         public void SubscribeToAlarm(AlarmWatch aw) {
-            _watchRepo.SubscribeToWatch(aw);
+            _watchRepo.SubscribeToAlarm(aw);
         }
 
     }

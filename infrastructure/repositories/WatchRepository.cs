@@ -19,10 +19,11 @@ namespace infrastructure.repositories
             _ctx.SaveChanges();
         }
 
-        public void SubscribeToWatch(AlarmWatch aw)
+        public void SubscribeToAlarm(AlarmWatch aw)
         {
-            _ctx.AlarmWatch.Add(aw);
-            _ctx.SaveChanges();
+                
+                _ctx.AlarmWatch.Add(aw);
+                _ctx.SaveChanges();
         }
     }
 }

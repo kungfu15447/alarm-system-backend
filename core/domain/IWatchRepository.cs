@@ -5,7 +5,7 @@ namespace core.domain
     public interface IWatchRepository
     {
         void SubscribeToMachine(MachineWatch mw);
-        void SubscribeToWatch(AlarmWatch aw);
+        void SubscribeToAlarm(AlarmWatch aw);
         
     }
 }
