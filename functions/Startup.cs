@@ -34,8 +34,6 @@ namespace AlarmSystem.Functions {
 
             builder.Services.AddScoped<IWatchService, WatchService>();
             builder.Services.AddScoped<IWatchRepository, WatchRepository>();
-
-            
         }
     }
 }

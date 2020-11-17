@@ -7,5 +7,7 @@ namespace core.application
         void SubscribeToMachine(MachineWatch mw);
 
         void SubscribeToAlarm(AlarmWatch aw);
+		
+		List<MachineWatch> GetMachineSubscriptionsFromWatch(string watchId);
     }
 }

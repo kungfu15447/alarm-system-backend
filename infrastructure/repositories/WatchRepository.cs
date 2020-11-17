@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
+using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
-using AlarmSystem.Infrastructure;
-using core.domain;
 
-namespace infrastructure.repositories
+namespace AlarmSystem.Infrastructure.Repositories
+
 {
     public class WatchRepository : IWatchRepository
     {
@@ -24,6 +26,14 @@ namespace infrastructure.repositories
                 
                 _ctx.AlarmWatch.Add(aw);
                 _ctx.SaveChanges();
+		}
+		
+		public List<MachineWatch> ReadAllMachineSubscriptionsByWatch(string watchId)
+        {
+            List<MachineWatch> subscriptions = _ctx.MachineWatch.Where(mw => mw.WatchId == watchId).ToList();
+            return subscriptions;
         }
+
+        
     }
 }

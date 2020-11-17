@@ -6,6 +6,6 @@ namespace core.domain
     {
         void SubscribeToMachine(MachineWatch mw);
         void SubscribeToAlarm(AlarmWatch aw);
-        
+		List<MachineWatch> ReadAllMachineSubscriptionsByWatch(string watchId);
     }
 }
