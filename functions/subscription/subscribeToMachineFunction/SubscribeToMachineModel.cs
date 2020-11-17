@@ -1,4 +1,4 @@
-namespace AlarmSystem.Core.Entity.Functions
+namespace AlarmSystem.Functions.Subscription.SubscribeToMachineFunction
 {
     public class SubscribeToMachineModel
     {

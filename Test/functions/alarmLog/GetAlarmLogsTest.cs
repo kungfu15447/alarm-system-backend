@@ -1,16 +1,15 @@
 
-using AlarmSystem.Functions.Machine;
+using AlarmSystem.Functions.AlarmLog;
 using AlarmSystem.Test.Utils;
 using core.application;
-using functions.alarm;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
-namespace AlarmSystem.Test.Functions.alarm
+namespace AlarmSystem.Test.Functions.AlarmLog
 {
-    public class GetAlarmsLogTest
+    public class GetAlarmLogsTest
     {
         private readonly ILogger logger = TestFactory.CreateLogger();
 
@@ -23,7 +22,7 @@ namespace AlarmSystem.Test.Functions.alarm
             //When
             alarmLogService.Setup(ms => ms.GetAlarmLog());
 
-            var res = await new GetAlarmLog(alarmLogService.Object).Run(req, logger);
+            var res = await new GetAlarmLogs(alarmLogService.Object).Run(req, logger);
 
             //Then
             alarmLogService.Verify(ms => ms.GetAlarmLog(), Times.Once());
@@ -38,7 +37,7 @@ namespace AlarmSystem.Test.Functions.alarm
             var alarmLogService = new Mock<IAlarmLogService>();
 
             //When
-            var res = (OkObjectResult)await new GetAlarmLog(alarmLogService.Object).Run(req, logger);
+            var res = (OkObjectResult)await new GetAlarmLogs(alarmLogService.Object).Run(req, logger);
 
             //Then
             Assert.IsType<OkObjectResult>(res);

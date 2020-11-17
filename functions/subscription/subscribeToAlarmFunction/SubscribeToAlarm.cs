@@ -8,10 +8,9 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.IO;
 using AlarmSystem.Core.Application;
-using AlarmSystem.Core.Entity.Functions;
 using System;
 
-namespace AlarmSystem.Functions.Watch {
+namespace AlarmSystem.Functions.Subscription.SubscribeToAlarmFunction {
 
     public class SubscribeToAlarm {
         private IWatchService _watchservice;
