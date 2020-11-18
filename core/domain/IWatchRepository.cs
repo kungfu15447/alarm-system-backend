@@ -6,5 +6,6 @@ namespace AlarmSystem.Core.Domain
     public interface IWatchRepository
     {
         List<MachineWatch> ReadAllMachineSubscriptionsByWatch(string watchId);
+        void RemoveMachineSubscriptionFromWatch(MachineWatch mw);
     }
 }
