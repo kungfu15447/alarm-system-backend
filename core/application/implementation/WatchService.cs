@@ -8,10 +8,18 @@ namespace AlarmSystem.Core.Application.Implementation
     public class WatchService : IWatchService
     {
         private IWatchRepository _watchRepo;
+		
         public WatchService(IWatchRepository watchRepo) {
             _watchRepo = watchRepo;
         }
 
+        public void SubscribeToMachine(MachineWatch mw) {
+            _watchRepo.SubscribeToMachine(mw);  
+        }
+
+        public void SubscribeToAlarm(AlarmWatch aw) {
+            _watchRepo.SubscribeToAlarm(aw);
+		}
         public List<AlarmWatch> GetAlarmSubscriptionsFromWatch(string watchId)
         {
             if (string.IsNullOrEmpty(watchId)) {

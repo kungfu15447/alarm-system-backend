@@ -62,7 +62,7 @@ namespace AlarmSystem.Test.Functions.Subscription
             var watchId = "watch-id-1";
             List<AlarmWatch> subscriptions = new List<AlarmWatch>(){
                 new AlarmWatch {
-                    Alarm = new Alarm {
+                    Alarm = new Core.Entity.Dto.Alarm {
                         AlarmId = 1
                     },
                     WatchId = watchId
