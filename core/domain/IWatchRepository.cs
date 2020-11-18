@@ -8,5 +8,6 @@ namespace AlarmSystem.Core.Domain
         void SubscribeToMachine(MachineWatch mw);
         void SubscribeToAlarm(AlarmWatch aw);
 		List<MachineWatch> ReadAllMachineSubscriptionsByWatch(string watchId);
+        List<AlarmWatch> ReadAllAlarmSubscriptionsByWatch(string watchId);
     }
 }
