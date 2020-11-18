@@ -18,7 +18,7 @@ namespace AlarmSystem.Test.Services.TestAlarm
             var alarmCode = 1;
         
             //When
-            mockRepo.Setup(mr => mr.ReadAlarmByCode(It.IsAny<int>())).Returns(new Alarm());
+            mockRepo.Setup(mr => mr.ReadAlarmByCode(It.IsAny<int>())).Returns(new AlarmSystem.Core.Entity.Dto.Alarm());
 
             service.GetAlarmByCode(alarmCode);
         
@@ -35,7 +35,7 @@ namespace AlarmSystem.Test.Services.TestAlarm
             var alarmCode = 1;
         
             //When
-            mockRepo.Setup(mr => mr.ReadAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<Alarm>());
+            mockRepo.Setup(mr => mr.ReadAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.Alarm>());
         
             //Then
             Assert.Throws<EntityNotFoundException>(() => service.GetAlarmByCode(alarmCode));

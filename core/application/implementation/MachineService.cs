@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AlarmSystem.Core.Application.Exception;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
 
@@ -17,6 +18,17 @@ namespace AlarmSystem.Core.Application.Implementation
             Guid guid = Guid.NewGuid();
             Machine machine = new Machine { MachineId = guid.ToString() };
             _machineRepo.CreateMachine(machine);
+        }
+
+        public Machine GetMachineById(string id)
+        {
+            Machine machine =  _machineRepo.ReadMachineById(id);
+
+            if(machine != null) {
+                return machine;
+            } else {
+                throw new EntityNotFoundException($"No machine was found with id: {id}");
+            }
         }
 
         public List<Machine> GetMachines()

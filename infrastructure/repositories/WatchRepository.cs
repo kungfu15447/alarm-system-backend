@@ -5,11 +5,14 @@ using AlarmSystem.Core.Entity.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace AlarmSystem.Infrastructure.Repositories
+
 {
     public class WatchRepository : IWatchRepository
     {
         private SystemContext _ctx;
-        public WatchRepository(SystemContext ctx) {
+
+        public WatchRepository(SystemContext ctx)
+        {
             _ctx = ctx;
         }
 
@@ -25,10 +28,38 @@ namespace AlarmSystem.Infrastructure.Repositories
             return subscriptions;
         }
 
+        public void SubscribeToMachine(MachineWatch mw)
+        {
+            _ctx.MachineWatch.Add(mw);
+            _ctx.SaveChanges();
+        }
+
+        public void SubscribeToAlarm(AlarmWatch aw)
+        {
+            _ctx.AlarmWatch.Add(aw);
+            _ctx.SaveChanges();
+		}
+		
+        public List<AlarmWatch> ReadAllAlarmSubscriptionsByWatch(string watchId)
+        {
+            List<AlarmWatch> subscriptions = _ctx.AlarmWatch.Include(aw => aw.Alarm).Where(aw => aw.WatchId == watchId).ToList();
+            return subscriptions;
+        }
+
         public List<MachineWatch> ReadAllMachineSubscriptionsByWatch(string watchId)
         {
             List<MachineWatch> subscriptions = _ctx.MachineWatch.Where(mw => mw.WatchId == watchId).ToList();
             return subscriptions;
+        }
+
+        public void RemoveMachineSubscriptionFromWatch(MachineWatch mw)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public MachineWatch ReadMachineSubscriptionOfMachineByWatch(string machineId, string watchdId)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

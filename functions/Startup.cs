@@ -5,6 +5,7 @@ using AlarmSystem.Core.Domain;
 using AlarmSystem.Functions.Notification.NotificationSettings;
 using AlarmSystem.Infrastructure;
 using AlarmSystem.Infrastructure.Repositories;
+using infrastructure.repositories;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Azure.NotificationHubs;
 using Microsoft.EntityFrameworkCore;
@@ -23,13 +24,20 @@ namespace AlarmSystem.Functions {
             builder.Services.AddDbContext<SystemContext>(
                 options => options.UseSqlServer(sqlConnection)
             );
+            
             builder.Services.AddScoped<INotificationHubConnectionSettings, NotificationHubConnectionSettings>();
+
+            builder.Services.AddScoped<IAlarmRepository, AlarmRepository>();
+            builder.Services.AddScoped<IAlarmService, AlarmService>();
+
             builder.Services.AddScoped<IMachineService, MachineService>();
             builder.Services.AddScoped<IMachineRepository, MachineRepository>();
+            
+            builder.Services.AddScoped<IAlarmLogService, AlarmLogService>();
+            builder.Services.AddScoped<IAlarmLogRepository, AlarmLogRepository>();
+
             builder.Services.AddScoped<IWatchService, WatchService>();
             builder.Services.AddScoped<IWatchRepository, WatchRepository>();
-            builder.Services.AddScoped<IAlarmService, AlarmService>();
-            builder.Services.AddScoped<IAlarmRepository, AlarmRepository>();
         }
     }
 }

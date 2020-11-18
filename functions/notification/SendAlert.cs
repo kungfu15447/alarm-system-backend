@@ -105,11 +105,14 @@ namespace AlarmSystem.Functions.Notification
 
         private void CreateAlarmLog(SendAlertModel sam)
         {
-            Alarm alarm = _alarmService.GetAlarmByCode(sam.AlarmCode);
+            AlarmSystem.Core.Entity.Dto.Alarm alarm = _alarmService.GetAlarmByCode(sam.AlarmCode);
             AlarmSystem.Core.Entity.Dto.Machine machine = new AlarmSystem.Core.Entity.Dto.Machine() { MachineId = sam.MachineId };
             var date = DateTime.UtcNow;
             long epochOfNow = new DateTimeOffset(date).ToUnixTimeMilliseconds();
-            AlarmLog al = new AlarmLog() { Alarm = alarm, Machine = machine, Date = epochOfNow };
+            AlarmSystem.Core.Entity.Dto.AlarmLog al = new AlarmSystem.Core.Entity.Dto.AlarmLog() 
+            { 
+                Alarm = alarm, Machine = machine, Date = epochOfNow 
+            };
 
             //Should call backend and create Alarm Log
         }
