@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.IO;
 using AlarmSystem.Core.Application;
 using System;
+using AlarmSystem.Core.Application.Exception;
 
 namespace AlarmSystem.Functions.Subscription.SubscribeToAlarmFunction {
 
@@ -33,7 +34,7 @@ namespace AlarmSystem.Functions.Subscription.SubscribeToAlarmFunction {
 
                      _watchservice.SubscribeToAlarm(aw);
                     return new OkResult();
-                } catch (Exception e) {
+                } catch (EntityNotFoundException e) {
                     return new BadRequestObjectResult(e.Message);
                 }
             }

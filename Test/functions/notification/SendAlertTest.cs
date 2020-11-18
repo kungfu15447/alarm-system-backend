@@ -33,11 +33,11 @@ namespace AlarmSystem.Test.Functions.Notifitcation
 
             var req = new HttpRequestBuilder().Body(body).Build();
 
-            var alarmSubs = new List<AlarmWatch>() { new AlarmWatch { Alarm = new Alarm { Code = 42, Description = "alarm-desc" }, WatchId = "watch-test-id-1" }};
+            var alarmSubs = new List<AlarmWatch>() { new AlarmWatch { Alarm = new AlarmSystem.Core.Entity.Dto.Alarm { Code = 42, Description = "alarm-desc" }, WatchId = "watch-test-id-1" }};
             var machineSubs = new List<MachineWatch>() { new MachineWatch { Machine = new Core.Entity.Dto.Machine { MachineId = "test-id-1" }, WatchId = "watch-test-id-1" } };
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<Alarm>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.Alarm>());
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
@@ -66,7 +66,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var machineSubs = new List<MachineWatch>();
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<Alarm>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.Alarm>());
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
@@ -95,7 +95,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var machineSubs = new List<MachineWatch>();
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<Alarm>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.Alarm>());
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
@@ -125,7 +125,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var machineSubs = new List<MachineWatch>();
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<Alarm>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.Alarm>());
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
@@ -153,7 +153,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var alarmSubs = new List<AlarmWatch>();
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<Alarm>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.Alarm>());
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Throws<InvalidDataException>();
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
@@ -182,7 +182,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var alarmSubs = new List<AlarmWatch>();
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<Alarm>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.Alarm>());
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Throws<InvalidDataException>();
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
