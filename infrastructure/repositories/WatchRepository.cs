@@ -14,7 +14,8 @@ namespace AlarmSystem.Infrastructure.Repositories
 
         public List<AlarmWatch> ReadAllAlarmSubscriptionsByWatch(string watchId)
         {
-            throw new System.NotImplementedException();
+            List<AlarmWatch> subscriptions = _ctx.AlarmWatch.Where(aw => aw.WatchId == watchId).ToList();
+            return subscriptions;
         }
 
         public List<MachineWatch> ReadAllMachineSubscriptionsByWatch(string watchId)
