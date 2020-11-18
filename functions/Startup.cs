@@ -4,7 +4,6 @@ using AlarmSystem.Core.Application.Implementation;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Infrastructure;
 using AlarmSystem.Infrastructure.Repositories;
-using core.application;
 using infrastructure.repositories;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +22,9 @@ namespace AlarmSystem.Functions {
             builder.Services.AddDbContext<SystemContext>(
                 options => options.UseSqlServer(sqlConnection)
             );
+
+            builder.Services.AddScoped<IAlarmRepository, AlarmRepository>();
+            builder.Services.AddScoped<IAlarmService, AlarmService>();
 
             builder.Services.AddScoped<IMachineService, MachineService>();
             builder.Services.AddScoped<IMachineRepository, MachineRepository>();
