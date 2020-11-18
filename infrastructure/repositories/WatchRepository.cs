@@ -20,7 +20,7 @@ namespace AlarmSystem.Infrastructure.Repositories
 
         public void RemoveMachineSubscriptionFromWatch(MachineWatch mw)
         {
-            throw new System.NotImplementedException();
+            _ctx.MachineWatch.Remove(mw);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace AlarmSystem.Core.Application.Implementation
 
         public void DeleteMachineSubscriptionFromWatch(MachineWatch mw)
         {
-            throw new System.NotImplementedException();
+            _watchRepo.RemoveMachineSubscriptionFromWatch(mw);
         }
 
         public List<MachineWatch> GetMachineSubscriptionsFromWatch(string watchId)
