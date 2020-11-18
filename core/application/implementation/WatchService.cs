@@ -17,6 +17,13 @@ namespace AlarmSystem.Core.Application.Implementation
             _watchRepo.RemoveMachineSubscriptionFromWatch(mw);
         }
 
+        //TODO Validate machine and watch id
+        //TODO Check to see if the returned MachineWatch is null
+        public MachineWatch GetMachineSubcriptionOfMachineFromWatch(string machineId, string watchId)
+        {
+            return _watchRepo.ReadMachineSubscriptionOfMachineByWatch(machineId, watchId);
+        }
+
         public List<MachineWatch> GetMachineSubscriptionsFromWatch(string watchId)
         {
             if (string.IsNullOrEmpty(watchId)) {

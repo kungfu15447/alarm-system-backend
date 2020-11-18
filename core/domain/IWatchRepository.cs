@@ -7,5 +7,6 @@ namespace AlarmSystem.Core.Domain
     {
         List<MachineWatch> ReadAllMachineSubscriptionsByWatch(string watchId);
         void RemoveMachineSubscriptionFromWatch(MachineWatch mw);
+        MachineWatch ReadMachineSubscriptionOfMachineByWatch(string machineId, string watchdId);
     }
 }
