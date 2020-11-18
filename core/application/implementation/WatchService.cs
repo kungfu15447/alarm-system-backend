@@ -12,6 +12,14 @@ namespace AlarmSystem.Core.Application.Implementation
             _watchRepo = watchRepo;
         }
 
+        public List<AlarmWatch> GetAlarmSubscriptionsFromWatch(string watchId)
+        {
+            if (string.IsNullOrEmpty(watchId)) {
+                throw new InvalidDataException("Watch id cannot be empty or non existent! Please include watch id");
+            }
+            return _watchRepo.ReadAllAlarmSubscriptionsByWatch(watchId);
+        }
+
         public List<MachineWatch> GetMachineSubscriptionsFromWatch(string watchId)
         {
             if (string.IsNullOrEmpty(watchId)) {
