@@ -51,15 +51,5 @@ namespace AlarmSystem.Infrastructure.Repositories
             List<MachineWatch> subscriptions = _ctx.MachineWatch.Where(mw => mw.WatchId == watchId).ToList();
             return subscriptions;
         }
-
-        public void RemoveMachineSubscriptionFromWatch(MachineWatch mw)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public MachineWatch ReadMachineSubscriptionOfMachineByWatch(string machineId, string watchdId)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
