@@ -13,7 +13,7 @@ namespace infrastructure.repositories
 
         public void CreateAlarm(Alarm alarm)
         {
-            _ctx.Add(alarm);
+            _ctx.Alarms.Add(alarm);
             _ctx.SaveChanges();
         }
 

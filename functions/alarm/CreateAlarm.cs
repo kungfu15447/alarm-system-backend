@@ -1,4 +1,16 @@
-namespace functions.alarm
+using System.IO;
+using System.Threading.Tasks;
+using AlarmSystem.Core.Entity.Dto;
+using Core.Application;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+
+namespace Functions.CreateAlarm
 {
     public class CreateAlarm
     {
@@ -14,7 +26,8 @@ namespace functions.alarm
             ILogger log)
             {
                 string reqBody = await new StreamReader(req.Body).ReadToEndAsync();
-                _alarmService.CreateAlarm(JsonConvert.DeserializeObject(reqBody));
+                var alarm = JsonConvert.DeserializeObject<Alarm>(reqBody);
+                _alarmService.CreateAlarm(alarm);
                 return new OkResult();
             }
     }
