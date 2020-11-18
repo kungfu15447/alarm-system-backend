@@ -19,7 +19,6 @@ namespace infrastructure.repositories
         {
             return _ctx.AlarmLogs.Include(al => al.Alarm)
                                  .Include(al => al.Machine).ToList();
-                  
         }
     }
 }

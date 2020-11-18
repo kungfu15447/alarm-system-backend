@@ -23,7 +23,6 @@ namespace AlarmSystem.Infrastructure.Repositories
 
         public void SubscribeToAlarm(AlarmWatch aw)
         {
-            
             _ctx.AlarmWatch.Add(aw);
             _ctx.SaveChanges();
 		}
@@ -33,7 +32,5 @@ namespace AlarmSystem.Infrastructure.Repositories
             List<MachineWatch> subscriptions = _ctx.MachineWatch.Where(mw => mw.WatchId == watchId).ToList();
             return subscriptions;
         }
-
-        
     }
 }
