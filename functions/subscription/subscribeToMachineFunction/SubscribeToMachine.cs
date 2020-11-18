@@ -27,7 +27,7 @@ namespace AlarmSystem.Functions.Subscription.SubscribeToMachineFunction {
         {
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             SubscribeToMachineModel stmm = JsonConvert.DeserializeObject<SubscribeToMachineModel>(requestBody);
-
+            
             try
             {
                 MachineWatch mw = ParseFunctionModelToDtoModel(stmm);
