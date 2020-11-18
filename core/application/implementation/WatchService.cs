@@ -12,6 +12,11 @@ namespace AlarmSystem.Core.Application.Implementation
             _watchRepo = watchRepo;
         }
 
+        public List<AlarmWatch> GetAlarmSubscriptionsFromWatch(string watchId)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public List<MachineWatch> GetMachineSubscriptionsFromWatch(string watchId)
         {
             if (string.IsNullOrEmpty(watchId)) {
