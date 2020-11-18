@@ -40,7 +40,7 @@ namespace AlarmSystem.Functions.Subscription.SubscribeToAlarmFunction {
 
         private AlarmWatch ParseFunctionModelToDtoModel(SubscribeToAlarmModel stam)
         {
-            Alarm alarm = _alarmservice.GetAlarmById(stam.AlarmId);
+            AlarmSystem.Core.Entity.Dto.Alarm alarm = _alarmservice.GetAlarmById(stam.AlarmId);
 
             AlarmWatch aw = new AlarmWatch()
             {

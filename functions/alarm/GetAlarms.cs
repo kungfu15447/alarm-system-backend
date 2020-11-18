@@ -2,15 +2,14 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AlarmSystem.Core.Entity.Dto;
-using Core.Application;
+using AlarmSystem.Core.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Functions.GetAlarms
+namespace AlarmSystem.Functions.Alarm
 {
     public class GetAlarms
     {
@@ -25,7 +24,7 @@ namespace Functions.GetAlarms
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "alarms")] HttpRequest req,
             ILogger log)
         {
-            List<Alarm> alarms = _alarmService.GetAllAlarms();
+            List<AlarmSystem.Core.Entity.Dto.Alarm> alarms = _alarmService.GetAllAlarms();
 
             if (alarms.Count == 0) {
                 return new NoContentResult();

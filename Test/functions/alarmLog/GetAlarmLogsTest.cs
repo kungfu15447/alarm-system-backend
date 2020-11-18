@@ -1,7 +1,7 @@
 
+using AlarmSystem.Core.Application.Implementation;
 using AlarmSystem.Functions.AlarmLog;
 using AlarmSystem.Test.Utils;
-using core.application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;

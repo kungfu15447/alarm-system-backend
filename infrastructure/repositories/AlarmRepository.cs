@@ -4,7 +4,7 @@ using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
 using AlarmSystem.Infrastructure;
 
-namespace infrastructure.repositories
+namespace AlarmSystem.Infrastructure.Repositories
 {
     public class AlarmRepository : IAlarmRepository
     {
@@ -17,7 +17,6 @@ namespace infrastructure.repositories
         {
             return _ctx.Alarms.FirstOrDefault(a => a.AlarmId == id);
 		}
-        public AlarmRepository(SystemContext ctx) => _ctx = ctx;
 
         public void CreateAlarm(Alarm alarm)
         {
