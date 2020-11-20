@@ -7,7 +7,6 @@ using AlarmSystem.Infrastructure;
 using AlarmSystem.Infrastructure.Repositories;
 using infrastructure.repositories;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
-using Microsoft.Azure.NotificationHubs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
