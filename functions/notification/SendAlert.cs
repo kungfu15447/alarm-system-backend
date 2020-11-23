@@ -21,13 +21,15 @@ namespace AlarmSystem.Functions.Notification
         private IWatchService _watchService;
         private IAlarmService _alarmService;
         private IMachineService _machineService;
+        private IAlarmLogService _alarmLogService;
         private readonly INotificationHubClient _hub;
-        public SendAlert(IWatchService watchService, IAlarmService alarmService, IMachineService machineService, INotificationHubConnectionSettings hub) 
+        public SendAlert(IWatchService watchService, IAlarmService alarmService, IMachineService machineService, IAlarmLogService alarmLogService, INotificationHubConnectionSettings hub) 
         {
             _hub = hub.Hub;
             _watchService = watchService;
             _alarmService = alarmService;
             _machineService = machineService;
+            _alarmLogService = alarmLogService;
         }
 
         //TODO Create alarm log
@@ -116,7 +118,7 @@ namespace AlarmSystem.Functions.Notification
                 Alarm = alarm, Machine = machine, Date = epochOfNow 
             };
 
-            //Should call backend and create Alarm Log
+            _alarmLogService.CreateAlarmLog(al);
         }
     }
 }

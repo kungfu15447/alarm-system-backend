@@ -6,5 +6,6 @@ namespace AlarmSystem.Core.Domain
     public interface IAlarmLogRepository
     {
         List<AlarmLog> GetAlarmLog();
+        void AddAlarmLog(AlarmLog alarmLog);
     }
 }

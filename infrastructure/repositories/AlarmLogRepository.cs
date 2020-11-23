@@ -15,6 +15,11 @@ namespace infrastructure.repositories
             _ctx = ctx;
         }
 
+        public void AddAlarmLog(AlarmLog alarmLog)
+        {
+            _ctx.AlarmLogs.Add(alarmLog);
+        }
+
         public List<AlarmLog> GetAlarmLog()
         {
             return _ctx.AlarmLogs.Include(al => al.Alarm)

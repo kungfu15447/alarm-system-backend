@@ -27,6 +27,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var alarmService = new Mock<IAlarmService>();
             var watchService = new Mock<IWatchService>();
             var machineService = new Mock<IMachineService>();
+            var alarmLogService = new Mock<IAlarmLogService>();
             var notificationConnectionSetting = new Mock<INotificationHubConnectionSettings>();
             var notificationHub = new Mock<INotificationHubClient>();
 
@@ -45,7 +46,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
             notificationConnectionSetting.Setup(ncs => ncs.Hub).Returns(notificationHub.Object);
 
-            var res = (OkResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, notificationConnectionSetting.Object).Run(req, logger);
+            var res = (OkResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, alarmLogService.Object, notificationConnectionSetting.Object).Run(req, logger);
 
             //Then
             Assert.IsType<OkResult>(res);
@@ -58,6 +59,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var alarmService = new Mock<IAlarmService>();
             var watchService = new Mock<IWatchService>();
             var machineService = new Mock<IMachineService>();
+            var alarmLogService = new Mock<IAlarmLogService>();
             var notificationConnectionSetting = new Mock<INotificationHubConnectionSettings>();
             var notificationHub = new Mock<INotificationHubClient>();
 
@@ -76,7 +78,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
             notificationConnectionSetting.Setup(ncs => ncs.Hub).Returns(notificationHub.Object);
 
-            var res = (NoContentResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, notificationConnectionSetting.Object).Run(req, logger);
+            var res = (NoContentResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, alarmLogService.Object, notificationConnectionSetting.Object).Run(req, logger);
 
             //Then
             Assert.IsType<NoContentResult>(res);
@@ -89,6 +91,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var alarmService = new Mock<IAlarmService>();
             var watchService = new Mock<IWatchService>();
             var machineService = new Mock<IMachineService>();
+            var alarmLogService = new Mock<IAlarmLogService>();
             var notificationConnectionSetting = new Mock<INotificationHubConnectionSettings>();
             var notificationHub = new Mock<INotificationHubClient>();
 
@@ -107,7 +110,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
             notificationConnectionSetting.Setup(ncs => ncs.Hub).Returns(notificationHub.Object);
 
-            var res = (NoContentResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, notificationConnectionSetting.Object).Run(req, logger);
+            var res = (NoContentResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, alarmLogService.Object, notificationConnectionSetting.Object).Run(req, logger);
 
             //Then
             watchService.Verify(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>()), Times.Once);
@@ -121,6 +124,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var alarmService = new Mock<IAlarmService>();
             var watchService = new Mock<IWatchService>();
             var machineService = new Mock<IMachineService>();
+            var alarmLogService = new Mock<IAlarmLogService>();
             var notificationConnectionSetting = new Mock<INotificationHubConnectionSettings>();
             var notificationHub = new Mock<INotificationHubClient>();
 
@@ -139,7 +143,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
             notificationConnectionSetting.Setup(ncs => ncs.Hub).Returns(notificationHub.Object);
 
-            var res = (NoContentResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, notificationConnectionSetting.Object).Run(req, logger);
+            var res = (NoContentResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, alarmLogService.Object, notificationConnectionSetting.Object).Run(req, logger);
 
             //Then
             alarmService.Verify(als => als.GetAlarmByCode(It.IsAny<int>()), Times.Once);
@@ -152,6 +156,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var alarmService = new Mock<IAlarmService>();
             var watchService = new Mock<IWatchService>();
             var machineService = new Mock<IMachineService>();
+            var alarmLogService = new Mock<IAlarmLogService>();
             var notificationConnectionSetting = new Mock<INotificationHubConnectionSettings>();
             var notificationHub = new Mock<INotificationHubClient>();
 
@@ -169,7 +174,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
             notificationConnectionSetting.Setup(ncs => ncs.Hub).Returns(notificationHub.Object);
 
-            var res = (BadRequestObjectResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, notificationConnectionSetting.Object).Run(req, logger);
+            var res = (BadRequestObjectResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, alarmLogService.Object, notificationConnectionSetting.Object).Run(req, logger);
 
             //Then
             Assert.IsType<BadRequestObjectResult>(res);
@@ -183,6 +188,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var alarmService = new Mock<IAlarmService>();
             var watchService = new Mock<IWatchService>();
             var machineService = new Mock<IMachineService>();
+            var alarmLogService = new Mock<IAlarmLogService>();
             var notificationConnectionSetting = new Mock<INotificationHubConnectionSettings>();
             var notificationHub = new Mock<INotificationHubClient>();
 
@@ -200,7 +206,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
             notificationConnectionSetting.Setup(ncs => ncs.Hub).Returns(notificationHub.Object);
 
-            var res = (BadRequestObjectResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, notificationConnectionSetting.Object).Run(req, logger);
+            var res = (BadRequestObjectResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, alarmLogService.Object, notificationConnectionSetting.Object).Run(req, logger);
 
             //Then
             Assert.False(String.IsNullOrEmpty((string) res.Value));
@@ -213,6 +219,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var alarmService = new Mock<IAlarmService>();
             var watchService = new Mock<IWatchService>();
             var machineService = new Mock<IMachineService>();
+            var alarmLogService = new Mock<IAlarmLogService>();
             var notificationConnectionSetting = new Mock<INotificationHubConnectionSettings>();
             var notificationHub = new Mock<INotificationHubClient>();
 
@@ -231,7 +238,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
             notificationConnectionSetting.Setup(ncs => ncs.Hub).Returns(notificationHub.Object);
 
-            var res = await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, notificationConnectionSetting.Object).Run(req, logger);
+            var res = await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, alarmLogService.Object, notificationConnectionSetting.Object).Run(req, logger);
 
             //Then
             Assert.IsType<NotFoundObjectResult>(res);
@@ -245,6 +252,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var alarmService = new Mock<IAlarmService>();
             var watchService = new Mock<IWatchService>();
             var machineService = new Mock<IMachineService>();
+            var alarmLogService = new Mock<IAlarmLogService>();
             var notificationConnectionSetting = new Mock<INotificationHubConnectionSettings>();
             var notificationHub = new Mock<INotificationHubClient>();
 
@@ -263,7 +271,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
             notificationConnectionSetting.Setup(ncs => ncs.Hub).Returns(notificationHub.Object);
 
-            var res = (NotFoundObjectResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, notificationConnectionSetting.Object).Run(req, logger);
+            var res = (NotFoundObjectResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, alarmLogService.Object, notificationConnectionSetting.Object).Run(req, logger);
 
             //Then
             Assert.False(String.IsNullOrEmpty((string) res.Value));
