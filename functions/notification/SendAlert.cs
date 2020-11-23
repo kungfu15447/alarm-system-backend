@@ -20,12 +20,14 @@ namespace AlarmSystem.Functions.Notification
     {
         private IWatchService _watchService;
         private IAlarmService _alarmService;
+        private IMachineService _machineService;
         private readonly INotificationHubClient _hub;
-        public SendAlert(IWatchService watchService, IAlarmService alarmService, INotificationHubConnectionSettings hub) 
+        public SendAlert(IWatchService watchService, IAlarmService alarmService, IMachineService machineService, INotificationHubConnectionSettings hub) 
         {
             _hub = hub.Hub;
             _watchService = watchService;
             _alarmService = alarmService;
+            _machineService = machineService;
         }
 
         //TODO Create alarm log
@@ -52,7 +54,7 @@ namespace AlarmSystem.Functions.Notification
             }
             catch(EntityNotFoundException e)
             {
-                return new BadRequestObjectResult(e.Message);
+                return new NotFoundObjectResult(e.Message);
             }
 
             string accessSignature = Environment.GetEnvironmentVariable("DefaultFullSharedAccessSignature");
@@ -106,7 +108,7 @@ namespace AlarmSystem.Functions.Notification
         private void CreateAlarmLog(SendAlertModel sam)
         {
             AlarmSystem.Core.Entity.Dto.Alarm alarm = _alarmService.GetAlarmByCode(sam.AlarmCode);
-            AlarmSystem.Core.Entity.Dto.Machine machine = new AlarmSystem.Core.Entity.Dto.Machine() { MachineId = sam.MachineId };
+            AlarmSystem.Core.Entity.Dto.Machine machine = _machineService.GetMachineById(sam.MachineId);
             var date = DateTime.UtcNow;
             long epochOfNow = new DateTimeOffset(date).ToUnixTimeMilliseconds();
             AlarmSystem.Core.Entity.Dto.AlarmLog al = new AlarmSystem.Core.Entity.Dto.AlarmLog() 
