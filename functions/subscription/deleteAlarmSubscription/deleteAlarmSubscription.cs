@@ -10,7 +10,7 @@ namespace AlarmSystem.Functions.Subscription.DeleteAlarmSubscription
     public class DeleteAlarmSubscription
     {
         [FunctionName("SubscribeToAlarm")]
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "subscribeToAlarm")] HttpRequest req,
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "alarmsubs")] HttpRequest req,
             ILogger log) 
             {
                 return new NoContentResult();
