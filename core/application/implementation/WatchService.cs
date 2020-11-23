@@ -38,7 +38,7 @@ namespace AlarmSystem.Core.Application.Implementation
 
         public void DeleteAlarmSubscriptionFromWatch(AlarmWatch aw)
         {
-            throw new System.NotImplementedException();
+            _watchRepo.RemoveAlarmSubscriptionFromWatch(aw);
         }
     }
 }

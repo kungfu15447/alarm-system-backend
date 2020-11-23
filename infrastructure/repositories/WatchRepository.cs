@@ -42,7 +42,8 @@ namespace AlarmSystem.Infrastructure.Repositories
 
         public void RemoveAlarmSubscriptionFromWatch(AlarmWatch aw)
         {
-            throw new System.NotImplementedException();
+            _ctx.AlarmWatch.Remove(aw);
+            _ctx.SaveChanges();
         }
     }
 }
