@@ -35,5 +35,10 @@ namespace AlarmSystem.Core.Application.Implementation
             }
             return _watchRepo.ReadAllMachineSubscriptionsByWatch(watchId);
         }
+
+        public void DeleteAlarmSubscriptionFromWatch(AlarmWatch aw)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
