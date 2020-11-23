@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
+using core.entity.dto;
 
 namespace AlarmSystem.Core.Application.Implementation
 {
@@ -22,6 +23,11 @@ namespace AlarmSystem.Core.Application.Implementation
         public List<Machine> GetMachines()
         {
             return _machineRepo.ReadAllMachines();
+        }
+
+        public List<Dto_Machine> GetAllMachinesWithSubs(string watchId)
+        {
+            return _machineRepo.ReadAllMachinesWithSubs(watchId);
         }
     }
 }
