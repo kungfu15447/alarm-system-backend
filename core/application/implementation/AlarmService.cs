@@ -33,7 +33,7 @@ namespace AlarmSystem.Core.Application.Implementation
                 if(alarm != null) {
                     return alarm;
                 } else {
-                    throw new InvalidDataException($"No alarm was found with id: {id}");
+                    throw new EntityNotFoundException($"No alarm was found with id: {id}");
                 }
             }
             throw new InvalidDataException($"the entered id: {id} must be higher than 0");

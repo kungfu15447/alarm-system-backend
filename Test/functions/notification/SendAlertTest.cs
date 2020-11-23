@@ -213,7 +213,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
         }
 
         [Fact]
-        public async Task TestFunctionShouldReturnNotFoundIfEntityNotFoundExceptionIsThrownWhenCreatingAlarmLogAsync()
+        public async Task TestFunctionShouldReturnNotFoundIfEntityNotFoundExceptionIsThrownWhenCreatingAlarmLog1Async()
         {
             //Given
             var alarmService = new Mock<IAlarmService>();
@@ -275,6 +275,71 @@ namespace AlarmSystem.Test.Functions.Notifitcation
 
             //Then
             Assert.False(String.IsNullOrEmpty((string) res.Value));
+        }
+
+        [Fact]
+        public async Task TestFunctionShouldCreateAlarmLogOnceAsync()
+        {
+            //Given
+            var alarmService = new Mock<IAlarmService>();
+            var watchService = new Mock<IWatchService>();
+            var machineService = new Mock<IMachineService>();
+            var alarmLogService = new Mock<IAlarmLogService>();
+            var notificationConnectionSetting = new Mock<INotificationHubConnectionSettings>();
+            var notificationHub = new Mock<INotificationHubClient>();
+
+            var body = new { MachineId = "test-id-1", AlarmCode = 42 };
+
+            var req = new HttpRequestBuilder().Body(body).Build();
+
+            var alarmSubs = new List<AlarmWatch>();
+            var machineSubs = new List<MachineWatch>();
+
+            //When
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.Alarm>());
+            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.Machine>());
+            watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
+            watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);
+            alarmLogService.Setup(alls => alls.CreateAlarmLog(It.IsAny<AlarmSystem.Core.Entity.Dto.AlarmLog>()));
+            notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
+            notificationConnectionSetting.Setup(ncs => ncs.Hub).Returns(notificationHub.Object);
+
+            await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, alarmLogService.Object, notificationConnectionSetting.Object).Run(req, logger);
+
+            //Then
+            alarmLogService.Verify(alls => alls.CreateAlarmLog(It.IsAny<AlarmSystem.Core.Entity.Dto.AlarmLog>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task TestFunctionShouldReturnNotFoundIfEntityNotFoundExceptionIsThrownWhenCreatingAlarmLog2Async()
+        {
+            //Given
+            var alarmService = new Mock<IAlarmService>();
+            var watchService = new Mock<IWatchService>();
+            var machineService = new Mock<IMachineService>();
+            var alarmLogService = new Mock<IAlarmLogService>();
+            var notificationConnectionSetting = new Mock<INotificationHubConnectionSettings>();
+            var notificationHub = new Mock<INotificationHubClient>();
+
+            var body = new { MachineId = "test-id-1", AlarmCode = 42 };
+
+            var req = new HttpRequestBuilder().Body(body).Build();
+
+            var alarmSubs = new List<AlarmWatch>();
+            var machineSubs = new List<MachineWatch>();
+
+            //When
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.Alarm>());
+            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Throws<EntityNotFoundException>();
+            watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
+            watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);
+            notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
+            notificationConnectionSetting.Setup(ncs => ncs.Hub).Returns(notificationHub.Object);
+
+            var res = (NotFoundObjectResult) await new SendAlert(watchService.Object, alarmService.Object, machineService.Object, alarmLogService.Object, notificationConnectionSetting.Object).Run(req, logger);
+
+            //Then
+            Assert.IsType<NotFoundObjectResult>(res);
         }
     }
 }

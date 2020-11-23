@@ -34,8 +34,12 @@ namespace AlarmSystem.Functions.Subscription.SubscribeToAlarmFunction {
 
                      _watchservice.SubscribeToAlarm(aw);
                     return new OkResult();
-                } catch (EntityNotFoundException e) {
+                } catch (InvalidDataException e) 
+                {
                     return new BadRequestObjectResult(e.Message);
+                } catch (EntityNotFoundException e)
+                {
+                    return new NotFoundObjectResult(e.Message);
                 }
             }
 
