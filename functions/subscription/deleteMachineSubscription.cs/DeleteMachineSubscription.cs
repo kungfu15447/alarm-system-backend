@@ -28,7 +28,15 @@ namespace AlarmSystem.Functions.Subscription.DeleteMachineSubscription
             string reqBody = await new StreamReader(req.Body).ReadToEndAsync();
             var model = JsonConvert.DeserializeObject<DeleteMachineSubscriptionModel>(reqBody);
 
-            MachineWatch mw = GetSpecificSubscription(model);
+            MachineWatch mw;
+            
+            try 
+            {
+                mw = GetSpecificSubscription(model);
+            } catch(InvalidDataException e) 
+            {
+                return new BadRequestObjectResult(e);
+            }
 
             _watchService.DeleteMachineSubscriptionFromWatch(mw);
 

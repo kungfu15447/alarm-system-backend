@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using AlarmSystem.Core.Domain;
@@ -19,11 +20,24 @@ namespace AlarmSystem.Core.Application.Implementation
             _watchRepo.RemoveMachineSubscriptionFromWatch(mw);
         }
 
-        //TODO Validate machine and watch id
-        //TODO Check to see if the returned MachineWatch is null
+
         public MachineWatch GetMachineSubcriptionOfMachineFromWatch(string machineId, string watchId)
         {
-            return _watchRepo.ReadMachineSubscriptionOfMachineByWatch(machineId, watchId);
+            if (String.IsNullOrEmpty(machineId) || String.IsNullOrEmpty(watchId)) 
+            {
+                throw new InvalidDataException("Cannot pass invalid data. Must not be null or empty");
+            }
+
+            var subscription = _watchRepo.ReadMachineSubscriptionOfMachineByWatch(machineId, watchId);
+
+            if (subscription != null) 
+            {
+                return subscription;
+            } 
+            else 
+            {
+                throw new InvalidDataException("Subscriptions was not found");
+            }
         }
         public void SubscribeToMachine(MachineWatch mw) 
         {
