@@ -7,5 +7,6 @@ namespace AlarmSystem.Core.Application
     {
         void CreateMachine();
         List<Machine> GetMachines();
+        Machine GetMachineById(string id);
     }
 }

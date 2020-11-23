@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using AlarmSystem.Core.Entity.Dto;
 
-namespace AlarmSystem.Core.Domain 
+namespace AlarmSystem.Core.Domain
 {
     public interface IAlarmRepository
     {
-        void CreateAlarm(Alarm alarm);
+        Alarm ReadAlarmById(int id);
+		void CreateAlarm(Alarm alarm);
         List<Alarm> GetAllAlarms();
-
-    }
+	}
 }

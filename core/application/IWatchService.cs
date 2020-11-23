@@ -5,8 +5,11 @@ namespace AlarmSystem.Core.Application
 {
     public interface IWatchService
     {
-        List<MachineWatch> GetMachineSubscriptionsFromWatch(string watchId);
         void DeleteMachineSubscriptionFromWatch(MachineWatch mw);
         MachineWatch GetMachineSubcriptionOfMachineFromWatch(string machineId, string watchId);
+        void SubscribeToMachine(MachineWatch mw);
+        void SubscribeToAlarm(AlarmWatch aw);
+		List<MachineWatch> GetMachineSubscriptionsFromWatch(string watchId);
+        List<AlarmWatch> GetAlarmSubscriptionsFromWatch(string watchId);
     }
 }

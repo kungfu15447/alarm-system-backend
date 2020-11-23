@@ -7,5 +7,6 @@ namespace AlarmSystem.Core.Domain
     {
         void CreateMachine(Machine machine);
         List<Machine> ReadAllMachines();
+        Machine ReadMachineById(string id);
     }
 }
