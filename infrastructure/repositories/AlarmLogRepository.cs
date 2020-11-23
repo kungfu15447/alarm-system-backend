@@ -18,6 +18,7 @@ namespace infrastructure.repositories
         public void AddAlarmLog(AlarmLog alarmLog)
         {
             _ctx.AlarmLogs.Add(alarmLog);
+            _ctx.SaveChanges();
         }
 
         public List<AlarmLog> GetAlarmLog()
