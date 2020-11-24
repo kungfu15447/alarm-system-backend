@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.Entity;
 
 namespace AlarmSystem.Core.Domain 
 {

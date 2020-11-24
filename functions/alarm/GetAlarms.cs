@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.Entity;
 using Core.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

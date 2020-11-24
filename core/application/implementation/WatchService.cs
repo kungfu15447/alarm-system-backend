@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.Entity;
 
 namespace AlarmSystem.Core.Application.Implementation
 {

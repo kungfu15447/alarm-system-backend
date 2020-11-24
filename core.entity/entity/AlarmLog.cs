@@ -1,4 +1,4 @@
-namespace AlarmSystem.Core.Entity.Dto {
+namespace AlarmSystem.Core.Entity.Entity {
     public class AlarmLog
     {
         public Machine Machine { get; set; }

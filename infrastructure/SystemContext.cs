@@ -1,4 +1,5 @@
 using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace AlarmSystem.Infrastructure {

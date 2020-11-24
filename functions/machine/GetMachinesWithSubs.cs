@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
-using core.entity.dto;
+using AlarmSystem.Core.Entity.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -23,7 +23,7 @@ namespace functions.machine
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "machines/{watchId}")] HttpRequest req,
             ILogger log, string watchId)
         {
-            List<Dto_Machine> machinesWithSubs = _machineService.GetAllMachinesWithSubs(watchId);
+            List<MachineWithSubscription> machinesWithSubs = _machineService.GetAllMachinesWithSubs(watchId);
 
             if (machinesWithSubs.Count == 0) {
                 return new NoContentResult();

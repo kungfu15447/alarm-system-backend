@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.Entity;
 
 namespace Core.Application.Implementation
 {

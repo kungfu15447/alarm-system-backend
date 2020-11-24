@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
-using core.entity.dto;
+using AlarmSystem.Core.Entity.Entity;
 
 namespace AlarmSystem.Core.Application.Implementation
 {
@@ -25,8 +26,11 @@ namespace AlarmSystem.Core.Application.Implementation
             return _machineRepo.ReadAllMachines();
         }
 
-        public List<Dto_Machine> GetAllMachinesWithSubs(string watchId)
+        public List<MachineWithSubscription> GetAllMachinesWithSubs(string watchId)
         {
+            if (string.IsNullOrEmpty(watchId)) {
+                throw new InvalidDataException("Watch id cannot be empty or non existent! Please include watch id");
+            }
             return _machineRepo.ReadAllMachinesWithSubs(watchId);
         }
     }
