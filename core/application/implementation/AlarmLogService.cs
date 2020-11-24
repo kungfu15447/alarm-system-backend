@@ -12,6 +12,11 @@ namespace AlarmSystem.Core.Application.Implementation
             _alarmRepository = alarmRepository;
         }
 
+        public void CreateAlarmLog(AlarmLog alarmLog)
+        {
+            _alarmRepository.AddAlarmLog(alarmLog);
+        }
+
         public List<AlarmLog> GetAlarmLog()
         {
             return _alarmRepository.GetAlarmLog();
