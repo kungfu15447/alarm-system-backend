@@ -1,5 +1,5 @@
 
-using AlarmSystem.Core.Application.Implementation;
+using AlarmSystem.Core.Application;
 using AlarmSystem.Functions.AlarmLog;
 using AlarmSystem.Test.Utils;
 using Microsoft.AspNetCore.Mvc;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AlarmSystem.Core.Application.Exception;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
 
@@ -26,7 +27,7 @@ namespace AlarmSystem.Core.Application.Implementation
             if(machine != null) {
                 return machine;
             } else {
-                throw new Exception($"No machine was found with id: {id}");
+                throw new EntityNotFoundException($"No machine was found with id: {id}");
             }
         }
 

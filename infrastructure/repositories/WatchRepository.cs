@@ -16,6 +16,18 @@ namespace AlarmSystem.Infrastructure.Repositories
             _ctx = ctx;
         }
 
+        public List<AlarmWatch> ReadAllAlarmSubscriptionsByAlarmCode(int alarmCode)
+        {
+            List<AlarmWatch> subscriptions = _ctx.AlarmWatch.Include(aw => aw.Alarm).Where(aw => aw.Alarm.Code == alarmCode).ToList();
+            return subscriptions;
+        }
+
+        public List<MachineWatch> ReadAllMachineSubscriptionsByMachine(string machineId)
+        {
+            List<MachineWatch> subscriptions = _ctx.MachineWatch.Include(mw => mw.Machine).Where(mw => mw.Machine.MachineId == machineId).ToList();
+            return subscriptions;
+        }
+
         public void SubscribeToMachine(MachineWatch mw)
         {
             _ctx.MachineWatch.Add(mw);
