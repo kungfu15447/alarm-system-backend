@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using AlarmSystem.Core.Domain;
-using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace AlarmSystem.Infrastructure.Repositories
 
@@ -14,6 +15,18 @@ namespace AlarmSystem.Infrastructure.Repositories
         public WatchRepository(SystemContext ctx)
         {
             _ctx = ctx;
+        }
+
+        public List<AlarmWatch> ReadAllAlarmSubscriptionsByAlarmCode(int alarmCode)
+        {
+            List<AlarmWatch> subscriptions = _ctx.AlarmWatch.Include(aw => aw.Alarm).Where(aw => aw.Alarm.Code == alarmCode).ToList();
+            return subscriptions;
+        }
+
+        public List<MachineWatch> ReadAllMachineSubscriptionsByMachine(string machineId)
+        {
+            List<MachineWatch> subscriptions = _ctx.MachineWatch.Include(mw => mw.Machine).Where(mw => mw.Machine.MachineId == machineId).ToList();
+            return subscriptions;
         }
 
         public void SubscribeToMachine(MachineWatch mw)

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using AlarmSystem.Core.Application.Implementation;
 using AlarmSystem.Core.Domain;
-using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 using Moq;
 using Xunit;
 

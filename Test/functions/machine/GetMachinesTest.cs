@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
-using AlarmSystem.Core.Application.Implementation;
 using AlarmSystem.Functions.Machine;
 using AlarmSystem.Test.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +22,7 @@ namespace AlarmSystem.Test.Functions.Machine
             var req = new HttpRequestBuilder().Build();
 
             //When
-            machineService.Setup(ms => ms.GetMachines()).Returns(It.IsAny<List<AlarmSystem.Core.Entity.Dto.Machine>>());
+            machineService.Setup(ms => ms.GetMachines()).Returns(It.IsAny<List<AlarmSystem.Core.Entity.DB.Machine>>());
 
             var res = new GetMachines(machineService.Object).Run(req, logger);
 
@@ -38,8 +37,8 @@ namespace AlarmSystem.Test.Functions.Machine
             var machineService = new Mock<IMachineService>();
             var req = new HttpRequestBuilder().Build();
 
-            List<Core.Entity.Dto.Machine> machines = new List<Core.Entity.Dto.Machine>(){
-                new Core.Entity.Dto.Machine() { MachineId = "this-is-a-test" }
+            List<AlarmSystem.Core.Entity.DB.Machine> machines = new List<AlarmSystem.Core.Entity.DB.Machine>(){
+                new AlarmSystem.Core.Entity.DB.Machine() { MachineId = "this-is-a-test" }
             };
 
             //When
@@ -58,7 +57,7 @@ namespace AlarmSystem.Test.Functions.Machine
             var machineService = new Mock<IMachineService>();
             var req = new HttpRequestBuilder().Build();
 
-            List<Core.Entity.Dto.Machine> machines = new List<Core.Entity.Dto.Machine>();
+            List<AlarmSystem.Core.Entity.DB.Machine> machines = new List<AlarmSystem.Core.Entity.DB.Machine>();
             //When
             machineService.Setup(ms => ms.GetMachines()).Returns(machines);
             

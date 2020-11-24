@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.IO;
 using AlarmSystem.Core.Application;
 using System;
+using AlarmSystem.Core.Application.Exception;
 
 namespace AlarmSystem.Functions.Subscription.SubscribeToMachineFunction {
 
@@ -34,7 +35,7 @@ namespace AlarmSystem.Functions.Subscription.SubscribeToMachineFunction {
                 _watchservice.SubscribeToMachine(mw);
                 return new OkResult();
             }
-            catch (Exception e)
+            catch (EntityNotFoundException e)
             {
                 return new BadRequestObjectResult(e.Message);
             }
@@ -42,7 +43,7 @@ namespace AlarmSystem.Functions.Subscription.SubscribeToMachineFunction {
 
         private MachineWatch ParseFunctionModelToDtoModel(SubscribeToMachineModel stmm)
         {
-            AlarmSystem.Core.Entity.Dto.Machine machine = _machineService.GetMachineById(stmm.MachineId);
+            AlarmSystem.Core.Entity.DB.Machine machine = _machineService.GetMachineById(stmm.MachineId);
 
             MachineWatch mw = new MachineWatch()
             {

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 
 namespace AlarmSystem.Core.Application
 {
@@ -7,6 +8,7 @@ namespace AlarmSystem.Core.Application
     {
         void CreateMachine();
         List<Machine> GetMachines();
+        List<MachineWithSubscription> GetAllMachinesWithSubs(string watchId);
         Machine GetMachineById(string id);
     }
 }
