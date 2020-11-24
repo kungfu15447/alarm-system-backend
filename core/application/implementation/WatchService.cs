@@ -43,8 +43,23 @@ namespace AlarmSystem.Core.Application.Implementation
 
         public AlarmWatch GetSubscriptionOfAlarmFromWatch(int alarmId, string watchId)
         {
-            //TODO Validation
-            return _watchRepo.ReadSubscriptionOfAlarmFromWatch(alarmId, watchId);
+            if (string.IsNullOrEmpty(watchId)) 
+            {
+                throw new InvalidDataException("Watch id cannot be empty or non existent! Please include watch id");
+            }
+            else 
+            {
+                AlarmWatch aw = _watchRepo.ReadSubscriptionOfAlarmFromWatch(alarmId, watchId);
+
+                if (aw != null) 
+                {
+                    return aw;
+                }
+                else
+                {
+                    throw new InvalidDataException("Entity was not found in database");
+                }
+            }
         }
     }
 }

@@ -27,13 +27,25 @@ namespace AlarmSystem.Functions.Subscription.DeleteAlarmSubscription
                 string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
                 DeleteAlarmSubscriptionModel dasm = JsonConvert.DeserializeObject<DeleteAlarmSubscriptionModel>(requestBody);
 
+                AlarmWatch aw;
 
-                return new NoContentResult();
+                try 
+                {
+                    aw = ParseFunctionModelToDtoModel(dasm);
+                } catch(InvalidDataException e)
+                {
+                    return new BadRequestObjectResult(e.Message);
+                }
+
+                _watchService.DeleteAlarmSubscriptionFromWatch(aw);
+
+                return new OkResult();
             }
 
-            private AlarmWatch ParseFunctionModelToDeleteModel(DeleteAlarmSubscriptionModel dasm)
+            private AlarmWatch ParseFunctionModelToDtoModel(DeleteAlarmSubscriptionModel dasm)
             {
-                return new AlarmWatch();
+                AlarmWatch aw = _watchService.GetSubscriptionOfAlarmFromWatch(dasm.AlarmId, dasm.WatchId);
+                return aw;
             }
     }
 }
