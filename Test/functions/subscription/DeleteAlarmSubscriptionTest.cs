@@ -1,7 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
-using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Functions.Subscription.DeleteAlarmSubscriptionFunction;
 using AlarmSystem.Test.Utils;
 using Microsoft.AspNetCore.Mvc;
