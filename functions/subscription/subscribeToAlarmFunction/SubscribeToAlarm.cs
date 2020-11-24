@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
@@ -45,7 +45,7 @@ namespace AlarmSystem.Functions.Subscription.SubscribeToAlarmFunction {
 
         private AlarmWatch ParseFunctionModelToDtoModel(SubscribeToAlarmModel stam)
         {
-            AlarmSystem.Core.Entity.Dto.Alarm alarm = _alarmservice.GetAlarmById(stam.AlarmId);
+            AlarmSystem.Core.Entity.DB.Alarm alarm = _alarmservice.GetAlarmById(stam.AlarmId);
 
             AlarmWatch aw = new AlarmWatch()
             {

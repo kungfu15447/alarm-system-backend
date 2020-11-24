@@ -16,7 +16,7 @@ namespace AlarmSystem.Test.Services.Alarm
             var mockRepo = new Mock<IAlarmRepository>();
             var service = new AlarmService(mockRepo.Object);
             int alarmId = 1;
-            AlarmSystem.Core.Entity.Dto.Alarm alarm = new AlarmSystem.Core.Entity.Dto.Alarm() {
+            AlarmSystem.Core.Entity.DB.Alarm alarm = new AlarmSystem.Core.Entity.DB.Alarm() {
                 AlarmId = alarmId,
                 Code = 123,
                 Description = "MockDescription"
@@ -40,7 +40,7 @@ namespace AlarmSystem.Test.Services.Alarm
             var service = new AlarmService(mockRepo.Object);
 
             //When
-            mockRepo.Setup(mr => mr.ReadAlarmById(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.Alarm>());
+            mockRepo.Setup(mr => mr.ReadAlarmById(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Alarm>());
         
 
             //Then

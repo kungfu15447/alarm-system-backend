@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
+using AlarmSystem.Core.Entity.DB;
 
 namespace AlarmSystem.Functions.AlarmLog
 {
@@ -21,7 +22,7 @@ namespace AlarmSystem.Functions.AlarmLog
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "alarmlog")] HttpRequest req,
             ILogger log) 
         {
-            List<AlarmSystem.Core.Entity.Dto.AlarmLog> alarmLogs =  _alarmService.GetAlarmLog();
+            List<AlarmSystem.Core.Entity.DB.AlarmLog> alarmLogs = _alarmService.GetAlarmLog();
             return new OkObjectResult(alarmLogs);
         }
     }

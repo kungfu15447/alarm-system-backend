@@ -1,6 +1,6 @@
 using AlarmSystem.Core.Application;
 using AlarmSystem.Core.Application.Implementation;
-using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Functions.Subscription.SubscribeToMachineFunction;
 using AlarmSystem.Test.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +27,7 @@ namespace AlarmSystem.Test.Functions.Subscription
             var machineService = new Mock<IMachineService>();
             
             MachineWatch mw = new MachineWatch{
-                Machine = new Core.Entity.Dto.Machine {
+                Machine = new Core.Entity.DB.Machine {
                     MachineId = "1"
                 },
                 WatchId = "1"
@@ -55,7 +55,7 @@ namespace AlarmSystem.Test.Functions.Subscription
             var watchService = new Mock<IWatchService>();
             var machineService = new Mock<IMachineService>();
 
-            var machine = new AlarmSystem.Core.Entity.Dto.Machine() {
+            var machine = new AlarmSystem.Core.Entity.DB.Machine() {
                 MachineId = "machine-id-1"
             };
 

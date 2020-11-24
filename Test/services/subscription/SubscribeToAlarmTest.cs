@@ -1,7 +1,7 @@
 using System.IO;
 using AlarmSystem.Core.Application.Implementation;
 using AlarmSystem.Core.Domain;
-using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 using Moq;
 using Xunit;
 
@@ -17,7 +17,7 @@ namespace AlarmSystem.Test.Services.Subscription
             var service = new WatchService(mockRepo.Object);
             
             AlarmWatch aw = new AlarmWatch{
-                Alarm = new Core.Entity.Dto.Alarm {
+                Alarm = new Core.Entity.DB.Alarm {
                     AlarmId = 1,
                     Code = 205,
                     Description = "TestDescription"

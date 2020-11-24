@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 
 namespace AlarmSystem.Core.Application
 {

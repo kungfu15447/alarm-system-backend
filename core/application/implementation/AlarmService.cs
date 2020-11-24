@@ -1,8 +1,8 @@
 using System;
 using System.IO;
 using AlarmSystem.Core.Domain;
-using AlarmSystem.Core.Entity.Dto;
 using System.Collections.Generic;
+using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Core.Application.Exception;
 
 namespace AlarmSystem.Core.Application.Implementation

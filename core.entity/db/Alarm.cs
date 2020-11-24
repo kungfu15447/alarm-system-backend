@@ -1,4 +1,4 @@
-namespace AlarmSystem.Core.Entity.Dto {
+namespace AlarmSystem.Core.Entity.DB {
     public class Alarm {
         public int AlarmId { get; set; }
         public int Code { get; set; }
