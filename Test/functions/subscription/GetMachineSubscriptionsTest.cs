@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
 using AlarmSystem.Core.Entity.Dto;
-using AlarmSystem.Core.Entity.Entity;
+using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Functions.Subscription;
 using AlarmSystem.Test.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +33,7 @@ namespace AlarmSystem.Test.Functions.Subscription
             {
                 new MachineWatch 
                 { 
-                    Machine = new AlarmSystem.Core.Entity.Entity.Machine 
+                    Machine = new AlarmSystem.Core.Entity.DB.Machine 
                     { 
                         MachineId = "machine-id-1"
                     },

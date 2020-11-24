@@ -22,7 +22,7 @@ namespace AlarmSystem.Test.Functions.Machine
             var req = new HttpRequestBuilder().Build();
 
             //When
-            machineService.Setup(ms => ms.GetMachines()).Returns(It.IsAny<List<AlarmSystem.Core.Entity.Entity.Machine>>());
+            machineService.Setup(ms => ms.GetMachines()).Returns(It.IsAny<List<AlarmSystem.Core.Entity.DB.Machine>>());
 
             var res = new GetMachines(machineService.Object).Run(req, logger);
 
@@ -37,8 +37,8 @@ namespace AlarmSystem.Test.Functions.Machine
             var machineService = new Mock<IMachineService>();
             var req = new HttpRequestBuilder().Build();
 
-            List<AlarmSystem.Core.Entity.Entity.Machine> machines = new List<AlarmSystem.Core.Entity.Entity.Machine>(){
-                new AlarmSystem.Core.Entity.Entity.Machine() { MachineId = "this-is-a-test" }
+            List<AlarmSystem.Core.Entity.DB.Machine> machines = new List<AlarmSystem.Core.Entity.DB.Machine>(){
+                new AlarmSystem.Core.Entity.DB.Machine() { MachineId = "this-is-a-test" }
             };
 
             //When
@@ -57,7 +57,7 @@ namespace AlarmSystem.Test.Functions.Machine
             var machineService = new Mock<IMachineService>();
             var req = new HttpRequestBuilder().Build();
 
-            List<AlarmSystem.Core.Entity.Entity.Machine> machines = new List<AlarmSystem.Core.Entity.Entity.Machine>();
+            List<AlarmSystem.Core.Entity.DB.Machine> machines = new List<AlarmSystem.Core.Entity.DB.Machine>();
             //When
             machineService.Setup(ms => ms.GetMachines()).Returns(machines);
             

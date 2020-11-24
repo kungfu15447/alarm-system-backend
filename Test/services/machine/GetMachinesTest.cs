@@ -15,7 +15,7 @@ namespace AlarmSystem.Test.Services.Machine
             var machineRepo = new Mock<IMachineRepository>();
 
             //When
-            machineRepo.Setup(mr => mr.ReadAllMachines()).Returns(It.IsAny<List<AlarmSystem.Core.Entity.Entity.Machine>>());
+            machineRepo.Setup(mr => mr.ReadAllMachines()).Returns(It.IsAny<List<AlarmSystem.Core.Entity.DB.Machine>>());
             var machineService = new MachineService(machineRepo.Object);
 
             machineService.GetMachines();

@@ -1,4 +1,4 @@
-namespace AlarmSystem.Core.Entity.Entity {
+namespace AlarmSystem.Core.Entity.DB {
 
     public class MachineWatch {
         public Machine Machine { get; set; }

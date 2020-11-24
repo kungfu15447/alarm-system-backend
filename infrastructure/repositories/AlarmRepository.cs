@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AlarmSystem.Core.Domain;
-using AlarmSystem.Core.Entity.Entity;
+using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Infrastructure;
 
 namespace AlarmSystem.Infrastructure.Repositories
