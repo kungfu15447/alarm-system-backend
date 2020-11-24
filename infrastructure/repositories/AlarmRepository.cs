@@ -4,12 +4,19 @@ using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Entity;
 using AlarmSystem.Infrastructure;
 
-namespace infrastructure.repositories
+namespace AlarmSystem.Infrastructure.Repositories
 {
     public class AlarmRepository : IAlarmRepository
     {
         private SystemContext _ctx;
-        public AlarmRepository(SystemContext ctx) => _ctx = ctx;
+ 
+        public AlarmRepository(SystemContext ctx) {
+            _ctx = ctx;
+        }
+        public Alarm ReadAlarmById(int id)
+        {
+            return _ctx.Alarms.FirstOrDefault(a => a.AlarmId == id);
+		}
 
         public void CreateAlarm(Alarm alarm)
         {

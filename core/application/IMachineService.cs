@@ -9,5 +9,6 @@ namespace AlarmSystem.Core.Application
         void CreateMachine();
         List<Machine> GetMachines();
         List<MachineWithSubscription> GetAllMachinesWithSubs(string watchId);
+        Machine GetMachineById(string id);
     }
 }

@@ -8,7 +8,8 @@ namespace AlarmSystem.Core.Domain
     {
         void CreateMachine(Machine machine);
         List<Machine> ReadAllMachines();
-
         List<MachineWithSubscription> ReadAllMachinesWithSubs(string WatchId);
+        Machine ReadMachineById(string id);
+
     }
 }
