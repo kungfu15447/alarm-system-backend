@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
 using AlarmSystem.Core.Application.Exception;
-using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Functions.Notification.NotificationSettings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -109,11 +109,11 @@ namespace AlarmSystem.Functions.Notification
 
         private void CreateAlarmLog(SendAlertModel sam)
         {
-            AlarmSystem.Core.Entity.Dto.Alarm alarm = _alarmService.GetAlarmByCode(sam.AlarmCode);
-            AlarmSystem.Core.Entity.Dto.Machine machine = _machineService.GetMachineById(sam.MachineId);
+            AlarmSystem.Core.Entity.DB.Alarm alarm = _alarmService.GetAlarmByCode(sam.AlarmCode);
+            AlarmSystem.Core.Entity.DB.Machine machine = _machineService.GetMachineById(sam.MachineId);
             var date = DateTime.UtcNow;
             long epochOfNow = new DateTimeOffset(date).ToUnixTimeMilliseconds();
-            AlarmSystem.Core.Entity.Dto.AlarmLog al = new AlarmSystem.Core.Entity.Dto.AlarmLog() 
+            AlarmSystem.Core.Entity.DB.AlarmLog al = new AlarmSystem.Core.Entity.DB.AlarmLog() 
             { 
                 Alarm = alarm, Machine = machine, Date = epochOfNow 
             };

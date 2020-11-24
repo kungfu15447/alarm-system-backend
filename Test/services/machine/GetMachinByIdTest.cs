@@ -18,7 +18,7 @@ namespace AlarmSystem.Test.Services.Machine
 
             var machineId = "machine-id-1";
 
-            var machine = new AlarmSystem.Core.Entity.Dto.Machine()
+            var machine = new AlarmSystem.Core.Entity.DB.Machine()
             {
                 MachineId = machineId
             };
@@ -42,13 +42,13 @@ namespace AlarmSystem.Test.Services.Machine
 
             var machineId = "machine-id-1";
 
-            var machine = new AlarmSystem.Core.Entity.Dto.Machine()
+            var machine = new AlarmSystem.Core.Entity.DB.Machine()
             {
                 MachineId = machineId
             };
             
             //When
-            mockRepo.Setup(mr => mr.ReadMachineById(It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.Machine>());
+            mockRepo.Setup(mr => mr.ReadMachineById(It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Machine>());
 
             //Then
             Assert.Throws<EntityNotFoundException>(() => service.GetMachineById(machineId));

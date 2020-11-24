@@ -58,7 +58,7 @@ namespace AlarmSystem.Test.Services.Alarm
             var alarmId = 1;
 
             //When
-            mockRepo.Setup(mr => mr.ReadAlarmById(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.Alarm>());
+            mockRepo.Setup(mr => mr.ReadAlarmById(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Alarm>());
         
 
             //Then
