@@ -9,7 +9,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace AlarmSystem.Functions.Subscription.DeleteAlarmSubscription
+namespace AlarmSystem.Functions.Subscription.DeleteAlarmSubscriptionFunction
 {
     public class DeleteAlarmSubscription
     {
@@ -20,7 +20,7 @@ namespace AlarmSystem.Functions.Subscription.DeleteAlarmSubscription
             _watchService = watchService;
         }
 
-        [FunctionName("SubscribeToAlarm")]
+        [FunctionName("DeleteAlarmSubscription")]
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "alarmsubs")] HttpRequest req,
             ILogger log) 
             {

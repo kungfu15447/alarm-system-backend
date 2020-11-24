@@ -1,4 +1,4 @@
-namespace AlarmSystem.Functions.Subscription.DeleteAlarmSubscription
+namespace AlarmSystem.Functions.Subscription.DeleteAlarmSubscriptionFunction
 {
     public class DeleteAlarmSubscriptionModel
     {
