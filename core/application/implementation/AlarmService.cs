@@ -4,6 +4,7 @@ using AlarmSystem.Core.Domain;
 using System.Collections.Generic;
 using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Core.Application.Exception;
+using core.entity.dto;
 
 namespace AlarmSystem.Core.Application.Implementation
 {
@@ -46,5 +47,9 @@ namespace AlarmSystem.Core.Application.Implementation
         {
             return _alarmRepo.GetAllAlarms();
         }
-	}
+        public List<AlarmWithSubscription> GetAllMachinesWithSubs(string watchId)
+        {
+            return _alarmRepo.ReadAllMachinesWithSubs(watchId);
+        }
+    }
 }

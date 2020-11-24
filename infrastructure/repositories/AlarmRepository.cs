@@ -6,6 +6,7 @@ using System.Linq;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Infrastructure;
+using core.entity.dto;
 
 namespace AlarmSystem.Infrastructure.Repositories
 {
@@ -36,6 +37,15 @@ namespace AlarmSystem.Infrastructure.Repositories
         public List<Alarm> GetAllAlarms()
         {
             return _ctx.Alarms.ToList();
+        }
+        public List<AlarmWithSubscription> ReadAllMachinesWithSubs(string watchId)
+        {            
+            return _ctx.Alarms.Select(a => new AlarmWithSubscription{
+                AlarmId = a.AlarmId,
+                Code = a.Code,
+                Description = a.Description,
+                IsSubscribed = _ctx.AlarmWatch.Any(aw => aw.Alarm.AlarmId == a.AlarmId && aw.WatchId == watchId)
+            }).ToList();
         }
     }
 }

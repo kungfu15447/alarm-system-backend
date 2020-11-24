@@ -25,16 +25,12 @@ namespace AlarmSystem.Infrastructure.Repositories
             return _ctx.Machines.ToList();
         }
 
-        public List<MachineWithSubscription> ReadAllMachinesWithSubs(string watchId){
-
-            var listOfSubs = _ctx.MachineWatch.Where(mw => watchId == mw.WatchId);
-            var listOfMachines = _ctx.Machines.Select(m => new MachineWithSubscription{
+        public List<MachineWithSubscription> ReadAllMachinesWithSubs(string watchId)
+        {
+            return _ctx.Machines.Select(m => new MachineWithSubscription{
                 MachineId = m.MachineId,
-                IsSubscribed = listOfSubs.FirstOrDefault(mw => mw.Machine.MachineId ==  m.MachineId && watchId == mw.WatchId).WatchId  == watchId
-            });
-
-
-            return listOfMachines.ToList();
+                IsSubscribed = _ctx.Machines.Any(mw => mw.MachineId == m.MachineId && mw.MachineId == watchId)
+            }).ToList();
         }
         public Machine ReadMachineById(string id)
         {
