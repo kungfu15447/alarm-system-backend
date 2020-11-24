@@ -3,6 +3,7 @@ using System.IO;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
 using AlarmSystem.Core.Entity.DB;
+using AlarmSystem.Core.Application.Exception;
 
 namespace AlarmSystem.Core.Application.Implementation
 {
@@ -74,7 +75,7 @@ namespace AlarmSystem.Core.Application.Implementation
                 }
                 else
                 {
-                    throw new InvalidDataException("Entity was not found in database");
+                    throw new EntityNotFoundException("Entity was not found in database");
                 }
             }
         }

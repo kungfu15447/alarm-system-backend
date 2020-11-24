@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
+using AlarmSystem.Core.Application.Exception;
 using AlarmSystem.Core.Entity.DB;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,9 @@ namespace AlarmSystem.Functions.Subscription.DeleteAlarmSubscriptionFunction
                 } catch(InvalidDataException e)
                 {
                     return new BadRequestObjectResult(e.Message);
+                } catch(EntityNotFoundException e) 
+                {
+                    return new NotFoundObjectResult(e.Message);
                 }
 
                 _watchService.DeleteAlarmSubscriptionFromWatch(aw);

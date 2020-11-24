@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
+using AlarmSystem.Core.Application.Exception;
 using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Functions.Subscription.DeleteAlarmSubscriptionFunction;
 using AlarmSystem.Test.Utils;
@@ -40,7 +41,7 @@ namespace AlarmSystem.Test.Functions.Subscription
         }
 
         [Fact]
-        public async Task TestFunctionShouldReturnBadRequestIfExceptionIsThrownAsync()
+        public async Task TestFunctionShouldReturnBadRequestIfInvalidDataExceptionIsThrownAsync()
         {
             //Given
             var body = new 
@@ -62,5 +63,30 @@ namespace AlarmSystem.Test.Functions.Subscription
             watchService.Verify(ws => ws.DeleteAlarmSubscriptionFromWatch(It.IsAny<AlarmWatch>()), Times.Never);
             watchService.Verify(ws => ws.GetSubscriptionOfAlarmFromWatch(It.IsAny<int>(), It.IsAny<string>()), Times.Once);
         }
+
+        [Fact]
+        public async Task TestFunctionShouldReturnNotFoundIfEntityNotFoundExceptionIsThrownAsync()
+        {
+            //Given
+            var body = new 
+            {
+                WatchId = "watch-id-1",
+                AlarmId = 1
+            };
+            var req = new HttpRequestBuilder().Body(body).Build();
+            var watchService = new Mock<IWatchService>();
+        
+            //When
+            watchService.Setup(ws => ws.DeleteAlarmSubscriptionFromWatch(It.IsAny<AlarmWatch>()));
+            watchService.Setup(ws => ws.GetSubscriptionOfAlarmFromWatch(It.IsAny<int>(), It.IsAny<string>())).Throws<EntityNotFoundException>();
+
+            var res = (NotFoundObjectResult) await new DeleteAlarmSubscription(watchService.Object).Run(req, logger);
+
+            //Then
+            Assert.IsType<NotFoundObjectResult>(res);
+            watchService.Verify(ws => ws.DeleteAlarmSubscriptionFromWatch(It.IsAny<AlarmWatch>()), Times.Never);
+            watchService.Verify(ws => ws.GetSubscriptionOfAlarmFromWatch(It.IsAny<int>(), It.IsAny<string>()), Times.Once);
+        }
+
     }
 }
