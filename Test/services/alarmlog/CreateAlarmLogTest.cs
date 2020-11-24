@@ -14,15 +14,15 @@ namespace AlarmSystem.Test.Services.AlarmLog
             var mockRepo = new Mock<IAlarmLogRepository>();
             var service = new AlarmLogService(mockRepo.Object);
             
-            var al = new AlarmSystem.Core.Entity.Dto.AlarmLog();
+            var al = new AlarmSystem.Core.Entity.DB.AlarmLog();
 
             //When
-            mockRepo.Setup(mr => mr.AddAlarmLog(It.IsAny<AlarmSystem.Core.Entity.Dto.AlarmLog>()));
+            mockRepo.Setup(mr => mr.AddAlarmLog(It.IsAny<AlarmSystem.Core.Entity.DB.AlarmLog>()));
 
             service.CreateAlarmLog(al);
 
             //Then
-            mockRepo.Verify(mr => mr.AddAlarmLog(It.IsAny<AlarmSystem.Core.Entity.Dto.AlarmLog>()), Times.Once);
+            mockRepo.Verify(mr => mr.AddAlarmLog(It.IsAny<AlarmSystem.Core.Entity.DB.AlarmLog>()), Times.Once);
         }
     }
 }
