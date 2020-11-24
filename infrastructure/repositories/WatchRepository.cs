@@ -45,5 +45,11 @@ namespace AlarmSystem.Infrastructure.Repositories
             _ctx.AlarmWatch.Remove(aw);
             _ctx.SaveChanges();
         }
+
+        public AlarmWatch ReadSubscriptionOfAlarmFromWatch(int alarmId, string watchId)
+        {
+            var subscriptions = _ctx.AlarmWatch.Include(aw => aw.Alarm).Where(aw => aw.Alarm.AlarmId == alarmId && aw.WatchId == watchId);
+            return subscriptions.FirstOrDefault();
+        }
     }
 }

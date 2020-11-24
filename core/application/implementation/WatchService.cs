@@ -40,5 +40,11 @@ namespace AlarmSystem.Core.Application.Implementation
         {
             _watchRepo.RemoveAlarmSubscriptionFromWatch(aw);
         }
+
+        public AlarmWatch GetSubscriptionOfAlarmFromWatch(int alarmId, string watchId)
+        {
+            //TODO Validation
+            return _watchRepo.ReadSubscriptionOfAlarmFromWatch(alarmId, watchId);
+        }
     }
 }

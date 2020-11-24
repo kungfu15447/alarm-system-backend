@@ -10,5 +10,6 @@ namespace AlarmSystem.Core.Application
 		List<MachineWatch> GetMachineSubscriptionsFromWatch(string watchId);
         List<AlarmWatch> GetAlarmSubscriptionsFromWatch(string watchId);
         void DeleteAlarmSubscriptionFromWatch(AlarmWatch aw);
+        AlarmWatch GetSubscriptionOfAlarmFromWatch(int alarmId, string watchId);
     }
 }
