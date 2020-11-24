@@ -1,3 +1,4 @@
+using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
 using AlarmSystem.Core.Entity.Dto;
@@ -52,13 +53,13 @@ namespace AlarmSystem.Test.Functions.Subscription
         
             //When
             watchService.Setup(ws => ws.DeleteAlarmSubscriptionFromWatch(It.IsAny<AlarmWatch>()));
-            watchService.Setup(ws => ws.GetSubscriptionOfAlarmFromWatch(It.IsAny<int>(), It.IsAny<string>())).Returns(It.IsAny<AlarmWatch>());
+            watchService.Setup(ws => ws.GetSubscriptionOfAlarmFromWatch(It.IsAny<int>(), It.IsAny<string>())).Throws<InvalidDataException>();
 
-            var res = (OkResult) await new DeleteAlarmSubscription(watchService.Object).Run(req, logger);
+            var res = (BadRequestObjectResult) await new DeleteAlarmSubscription(watchService.Object).Run(req, logger);
 
             //Then
-            Assert.IsType<OkResult>(res);
-            watchService.Verify(ws => ws.DeleteAlarmSubscriptionFromWatch(It.IsAny<AlarmWatch>()), Times.Once);
+            Assert.IsType<BadRequestObjectResult>(res);
+            watchService.Verify(ws => ws.DeleteAlarmSubscriptionFromWatch(It.IsAny<AlarmWatch>()), Times.Never);
             watchService.Verify(ws => ws.GetSubscriptionOfAlarmFromWatch(It.IsAny<int>(), It.IsAny<string>()), Times.Once);
         }
     }
