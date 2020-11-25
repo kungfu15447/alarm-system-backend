@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
+using AlarmSystem.Core.Application.Exception;
 using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Functions.Subscription.DeleteMachineSubscription;
 using AlarmSystem.Test.Utils;
@@ -83,6 +84,30 @@ namespace AlarmSystem.Test.Functions.Subscription
         
             //Then
             Assert.IsType<BadRequestObjectResult>(res);
+            watchService.Verify(ws => ws.DeleteMachineSubscriptionFromWatch(It.IsAny<MachineWatch>()), Times.Never);
+        }
+
+        [Fact]
+        public async Task TestFunctionShouldReturnNotFoundResultIfEntityNotFoundExceptionIsThrownAsync()
+        {
+            //Given
+            var body = new 
+            {
+                MachineId = "machine-test-1",
+                WatchId = "watch-test-1"
+            };
+
+            var req = new HttpRequestBuilder().Body(body).Build();
+            var watchService = new Mock<IWatchService>();
+
+            //When
+            watchService.Setup(ws => ws.DeleteMachineSubscriptionFromWatch(It.IsAny<MachineWatch>()));
+            watchService.Setup(ws => ws.GetMachineSubcriptionOfMachineFromWatch(It.IsAny<string>(), It.IsAny<string>())).Throws<EntityNotFoundException>();
+
+            var res = (NotFoundObjectResult) await new DeleteMachineSubscription(watchService.Object).Run(req, logger);
+        
+            //Then
+            Assert.IsType<NotFoundObjectResult>(res);
             watchService.Verify(ws => ws.DeleteMachineSubscriptionFromWatch(It.IsAny<MachineWatch>()), Times.Never);
         }
     }
