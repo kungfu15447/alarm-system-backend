@@ -1,4 +1,4 @@
-namespace core.entity.dto
+namespace AlarmSystem.Core.Entity.Dto
 {
     public class AlarmWithSubscription
     {

@@ -4,7 +4,7 @@ using AlarmSystem.Core.Domain;
 using System.Collections.Generic;
 using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Core.Application.Exception;
-using core.entity.dto;
+using AlarmSystem.Core.Entity.Dto;
 
 namespace AlarmSystem.Core.Application.Implementation
 {

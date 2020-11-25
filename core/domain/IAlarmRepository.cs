@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using AlarmSystem.Core.Entity.DB;
-using core.entity.dto;
+using AlarmSystem.Core.Entity.Dto;
 
 namespace AlarmSystem.Core.Domain
 {

@@ -27,12 +27,14 @@ namespace AlarmSystem.Functions.Machine
             try{
                 List<MachineWithSubscription> machinesWithSubs = _machineService.GetAllMachinesWithSubs(watchId);
 
-                if (machinesWithSubs.Count == 0) {
-                return new NoContentResult();
+                if (machinesWithSubs.Count == 0) 
+                {
+                    return new NoContentResult();
                 }
-
+                
                 return new OkObjectResult(machinesWithSubs);
-            }catch(InvalidDataException e){
+            }catch(InvalidDataException e)
+            {
                 return new BadRequestObjectResult(e.Message);
             }
             
