@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
 using AlarmSystem.Core.Entity.Dto;
@@ -8,7 +9,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 
-namespace functions.machine
+namespace AlarmSystem.Functions.Machine
 {
     public class GetMachinesWithSubs
     {
@@ -23,13 +24,18 @@ namespace functions.machine
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "machines/{watchId}")] HttpRequest req,
             ILogger log, string watchId)
         {
-            List<MachineWithSubscription> machinesWithSubs = _machineService.GetAllMachinesWithSubs(watchId);
+            try{
+                List<MachineWithSubscription> machinesWithSubs = _machineService.GetAllMachinesWithSubs(watchId);
 
-            if (machinesWithSubs.Count == 0) {
+                if (machinesWithSubs.Count == 0) {
                 return new NoContentResult();
-            }
+                }
 
-            return new OkObjectResult(machinesWithSubs);
+                return new OkObjectResult(machinesWithSubs);
+            }catch(InvalidDataException e){
+                return new BadRequestObjectResult(e.Message);
+            }
+            
         }
     }
 }
