@@ -53,6 +53,17 @@ namespace AlarmSystem.Infrastructure.Repositories
             return subscriptions;
         }
 
+        public void RemoveAlarmSubscriptionFromWatch(AlarmWatch aw)
+        {
+            _ctx.AlarmWatch.Remove(aw);
+            _ctx.SaveChanges();
+        }
+
+        public AlarmWatch ReadSubscriptionOfAlarmFromWatch(int alarmId, string watchId)
+        {
+            var subscriptions = _ctx.AlarmWatch.Include(aw => aw.Alarm).Where(aw => aw.Alarm.AlarmId == alarmId && aw.WatchId == watchId);
+            return subscriptions.FirstOrDefault();
+		}
         public MachineWatch ReadMachineSubscriptionOfMachineByWatch(string machineId, string watchdId)
         {
             MachineWatch mw = _ctx.MachineWatch
@@ -65,6 +76,7 @@ namespace AlarmSystem.Infrastructure.Repositories
         public void RemoveMachineSubscriptionFromWatch(MachineWatch mw)
         {
             _ctx.MachineWatch.Remove(mw);
+			_ctx.SaveChanges();
         }
     }
 }

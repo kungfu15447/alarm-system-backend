@@ -80,5 +80,31 @@ namespace AlarmSystem.Core.Application.Implementation
             }
             return _watchRepo.ReadAllMachineSubscriptionsByWatch(watchId);
         }
+
+        public void DeleteAlarmSubscriptionFromWatch(AlarmWatch aw)
+        {
+            _watchRepo.RemoveAlarmSubscriptionFromWatch(aw);
+        }
+
+        public AlarmWatch GetSubscriptionOfAlarmFromWatch(int alarmId, string watchId)
+        {
+            if (string.IsNullOrEmpty(watchId)) 
+            {
+                throw new InvalidDataException("Watch id cannot be empty or non existent! Please include watch id");
+            }
+            else 
+            {
+                AlarmWatch aw = _watchRepo.ReadSubscriptionOfAlarmFromWatch(alarmId, watchId);
+
+                if (aw != null) 
+                {
+                    return aw;
+                }
+                else
+                {
+                    throw new EntityNotFoundException("Entity was not found in database");
+                }
+            }
+        }
     }
 }
