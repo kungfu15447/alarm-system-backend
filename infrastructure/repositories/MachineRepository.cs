@@ -3,6 +3,7 @@ using System.Linq;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
 using AlarmSystem.Core.Entity.DB;
+using Microsoft.EntityFrameworkCore;
 
 namespace AlarmSystem.Infrastructure.Repositories
 {
@@ -29,7 +30,7 @@ namespace AlarmSystem.Infrastructure.Repositories
         {
             return _ctx.Machines.Select(m => new MachineWithSubscription{
                 MachineId = m.MachineId,
-                IsSubscribed = _ctx.Machines.Any(mw => mw.MachineId == m.MachineId && mw.MachineId == watchId)
+                IsSubscribed = _ctx.MachineWatch.Any(mw => mw.Machine.MachineId == m.MachineId && mw.WatchId == watchId)
             }).ToList();
         }
         public Machine ReadMachineById(string id)

@@ -7,6 +7,7 @@ using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Infrastructure;
 using core.entity.dto;
+using Microsoft.EntityFrameworkCore;
 
 namespace AlarmSystem.Infrastructure.Repositories
 {
