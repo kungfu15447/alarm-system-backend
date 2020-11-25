@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using AlarmSystem.Core.Domain;
@@ -11,10 +12,35 @@ namespace AlarmSystem.Core.Application.Implementation
     {
         private IWatchRepository _watchRepo;
 		
-        public WatchService(IWatchRepository watchRepo) {
+        public WatchService(IWatchRepository watchRepo) 
+        {
             _watchRepo = watchRepo;
         }
 
+        public void DeleteMachineSubscriptionFromWatch(MachineWatch mw)
+        {
+            _watchRepo.RemoveMachineSubscriptionFromWatch(mw);
+        }
+
+
+        public MachineWatch GetMachineSubcriptionOfMachineFromWatch(string machineId, string watchId)
+        {
+            if (String.IsNullOrEmpty(machineId) || String.IsNullOrEmpty(watchId)) 
+            {
+                throw new InvalidDataException("Cannot pass invalid data. Must not be null or empty");
+            }
+
+            var subscription = _watchRepo.ReadMachineSubscriptionOfMachineByWatch(machineId, watchId);
+
+            if (subscription != null) 
+            {
+                return subscription;
+            } 
+            else 
+            {
+                throw new EntityNotFoundException("Subscriptions was not found");
+            }
+        }
         public List<AlarmWatch> GetAlarmSubscriptionsByAlarmCode(int alarmCode)
         {
             return _watchRepo.ReadAllAlarmSubscriptionsByAlarmCode(alarmCode);
@@ -48,7 +74,8 @@ namespace AlarmSystem.Core.Application.Implementation
 
         public List<MachineWatch> GetMachineSubscriptionsFromWatch(string watchId)
         {
-            if (string.IsNullOrEmpty(watchId)) {
+            if (string.IsNullOrEmpty(watchId)) 
+            {
                 throw new InvalidDataException("Watch id cannot be empty or non existent! Please include watch id");
             }
             return _watchRepo.ReadAllMachineSubscriptionsByWatch(watchId);

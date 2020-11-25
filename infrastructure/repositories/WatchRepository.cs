@@ -63,6 +63,20 @@ namespace AlarmSystem.Infrastructure.Repositories
         {
             var subscriptions = _ctx.AlarmWatch.Include(aw => aw.Alarm).Where(aw => aw.Alarm.AlarmId == alarmId && aw.WatchId == watchId);
             return subscriptions.FirstOrDefault();
+		}
+        public MachineWatch ReadMachineSubscriptionOfMachineByWatch(string machineId, string watchdId)
+        {
+            MachineWatch mw = _ctx.MachineWatch
+                                .Include(mw => mw.Machine)
+                                .Where(mw => mw.Machine.MachineId == machineId && mw.WatchId == watchdId)
+                                .FirstOrDefault();
+            return mw;
+        }
+
+        public void RemoveMachineSubscriptionFromWatch(MachineWatch mw)
+        {
+            _ctx.MachineWatch.Remove(mw);
+			_ctx.SaveChanges();
         }
     }
 }
