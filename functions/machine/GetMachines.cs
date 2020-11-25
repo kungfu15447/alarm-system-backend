@@ -23,7 +23,7 @@ namespace AlarmSystem.Functions.Machine
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "machines")] HttpRequest req,
             ILogger log)
         {
-            List<AlarmSystem.Core.Entity.Dto.Machine> machines = _machineService.GetMachines();
+            List<AlarmSystem.Core.Entity.DB.Machine> machines = _machineService.GetMachines();
 
             if (machines.Count == 0) {
                 return new NoContentResult();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 
 namespace AlarmSystem.Core.Application.Implementation
 {
@@ -39,6 +40,19 @@ namespace AlarmSystem.Core.Application.Implementation
                 throw new InvalidDataException("Subscriptions was not found");
             }
         }
+        public List<AlarmWatch> GetAlarmSubscriptionsByAlarmCode(int alarmCode)
+        {
+            return _watchRepo.ReadAllAlarmSubscriptionsByAlarmCode(alarmCode);
+        }
+
+        public List<MachineWatch> GetMachineSubscriptionsByMachine(string machineId)
+        {
+            if (string.IsNullOrEmpty(machineId)) {
+                throw new InvalidDataException("Machine Id cannot be empty or non existent! Please include machine id");
+            }
+            return _watchRepo.ReadAllMachineSubscriptionsByMachine(machineId);
+        }
+
         public void SubscribeToMachine(MachineWatch mw) 
         {
             _watchRepo.SubscribeToMachine(mw);  
@@ -48,7 +62,7 @@ namespace AlarmSystem.Core.Application.Implementation
         {
             _watchRepo.SubscribeToAlarm(aw);
 		}
-
+        
         public List<AlarmWatch> GetAlarmSubscriptionsFromWatch(string watchId)
         {
             if (string.IsNullOrEmpty(watchId)) {

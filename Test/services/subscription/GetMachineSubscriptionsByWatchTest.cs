@@ -19,7 +19,7 @@ namespace AlarmSystem.Test.Services.Subscription
             var watchId = "watch-id-1";
 
             //When
-            mockRepo.Setup(mr => mr.ReadAllMachineSubscriptionsByWatch(It.IsAny<string>())).Returns(It.IsAny<List<MachineWatch>>());
+            mockRepo.Setup(mr => mr.ReadAllMachineSubscriptionsByWatch(It.IsAny<string>())).Returns(It.IsAny<List<AlarmSystem.Core.Entity.DB.MachineWatch>>());
 
             service.GetMachineSubscriptionsFromWatch(watchId);
         
@@ -37,7 +37,7 @@ namespace AlarmSystem.Test.Services.Subscription
             var service = new WatchService(mockRepo.Object);
 
             //When
-            mockRepo.Setup(mr => mr.ReadAllMachineSubscriptionsByWatch(It.IsAny<string>())).Returns(It.IsAny<List<MachineWatch>>());
+            mockRepo.Setup(mr => mr.ReadAllMachineSubscriptionsByWatch(It.IsAny<string>())).Returns(It.IsAny<List<AlarmSystem.Core.Entity.DB.MachineWatch>>());
         
             //Then
             Assert.Throws<InvalidDataException>(() => service.GetMachineSubscriptionsFromWatch(watchId));

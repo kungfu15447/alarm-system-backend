@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
-using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Functions.Subscription;
 using AlarmSystem.Test.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -62,7 +62,7 @@ namespace AlarmSystem.Test.Functions.Subscription
             var watchId = "watch-id-1";
             List<AlarmWatch> subscriptions = new List<AlarmWatch>(){
                 new AlarmWatch {
-                    Alarm = new Core.Entity.Dto.Alarm {
+                    Alarm = new Core.Entity.DB.Alarm {
                         AlarmId = 1
                     },
                     WatchId = watchId

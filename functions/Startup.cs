@@ -2,6 +2,7 @@ using System;
 using AlarmSystem.Core.Application;
 using AlarmSystem.Core.Application.Implementation;
 using AlarmSystem.Core.Domain;
+using AlarmSystem.Functions.Notification.NotificationSettings;
 using AlarmSystem.Infrastructure;
 using AlarmSystem.Infrastructure.Repositories;
 using infrastructure.repositories;
@@ -22,6 +23,8 @@ namespace AlarmSystem.Functions {
             builder.Services.AddDbContext<SystemContext>(
                 options => options.UseSqlServer(sqlConnection)
             );
+            
+            builder.Services.AddScoped<INotificationHubConnectionSettings, NotificationHubConnectionSettings>();
 
             builder.Services.AddScoped<IAlarmRepository, AlarmRepository>();
             builder.Services.AddScoped<IAlarmService, AlarmService>();
@@ -34,9 +37,6 @@ namespace AlarmSystem.Functions {
 
             builder.Services.AddScoped<IWatchService, WatchService>();
             builder.Services.AddScoped<IWatchRepository, WatchRepository>();
-
-            builder.Services.AddScoped<IAlarmService, AlarmService>();
-            builder.Services.AddScoped<IAlarmRepository, AlarmRepository>();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace AlarmSystem.Test.Services.AlarmLog
             var service = new AlarmLogService(mockRepo.Object);
 
             //When
-            mockRepo.Setup(mr => mr.GetAlarmLog()).Returns(It.IsAny<List<AlarmSystem.Core.Entity.Dto.AlarmLog>>());
+            mockRepo.Setup(mr => mr.GetAlarmLog()).Returns(It.IsAny<List<AlarmSystem.Core.Entity.DB.AlarmLog>>());
 
             service.GetAlarmLog();
         

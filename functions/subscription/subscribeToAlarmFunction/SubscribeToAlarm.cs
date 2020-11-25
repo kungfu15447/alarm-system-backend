@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.IO;
 using AlarmSystem.Core.Application;
 using System;
+using AlarmSystem.Core.Application.Exception;
 
 namespace AlarmSystem.Functions.Subscription.SubscribeToAlarmFunction {
 
@@ -33,14 +34,18 @@ namespace AlarmSystem.Functions.Subscription.SubscribeToAlarmFunction {
 
                      _watchservice.SubscribeToAlarm(aw);
                     return new OkResult();
-                } catch (Exception e) {
+                } catch (InvalidDataException e) 
+                {
                     return new BadRequestObjectResult(e.Message);
+                } catch (EntityNotFoundException e)
+                {
+                    return new NotFoundObjectResult(e.Message);
                 }
             }
 
         private AlarmWatch ParseFunctionModelToDtoModel(SubscribeToAlarmModel stam)
         {
-            AlarmSystem.Core.Entity.Dto.Alarm alarm = _alarmservice.GetAlarmById(stam.AlarmId);
+            AlarmSystem.Core.Entity.DB.Alarm alarm = _alarmservice.GetAlarmById(stam.AlarmId);
 
             AlarmWatch aw = new AlarmWatch()
             {

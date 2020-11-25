@@ -1,6 +1,6 @@
 using AlarmSystem.Core.Application;
 using AlarmSystem.Core.Application.Implementation;
-using AlarmSystem.Core.Entity.Dto;
+using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Functions.Subscription.SubscribeToAlarmFunction;
 using AlarmSystem.Test.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +27,7 @@ namespace AlarmSystem.Test.Functions.Subscription
             var alarmService = new Mock<IAlarmService>();
             
             AlarmWatch aw = new AlarmWatch{
-                Alarm = new Core.Entity.Dto.Alarm {
+                Alarm = new AlarmSystem.Core.Entity.DB.Alarm {
                     AlarmId = 1,
                     Code = 205,
                     Description = "TestDescription"

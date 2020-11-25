@@ -1,5 +1,3 @@
-
-
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
@@ -24,7 +22,7 @@ namespace AlarmSystem.Functions.Alarm
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "alarms")] HttpRequest req,
             ILogger log)
         {
-            List<AlarmSystem.Core.Entity.Dto.Alarm> alarms = _alarmService.GetAllAlarms();
+            List<AlarmSystem.Core.Entity.DB.Alarm> alarms = _alarmService.GetAllAlarms();
 
             if (alarms.Count == 0) {
                 return new NoContentResult();
