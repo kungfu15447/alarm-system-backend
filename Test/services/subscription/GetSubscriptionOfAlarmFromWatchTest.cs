@@ -1,4 +1,5 @@
 using System.IO;
+using AlarmSystem.Core.Application.Exception;
 using AlarmSystem.Core.Application.Implementation;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.DB;
@@ -43,6 +44,23 @@ namespace AlarmSystem.Test.Services.Subscription
             //Then
             Assert.Throws<InvalidDataException>(() => service.GetSubscriptionOfAlarmFromWatch(alarmId, watchId));
             mockRepo.Verify(mr => mr.ReadSubscriptionOfAlarmFromWatch(It.IsAny<int>(), It.IsAny<string>()), Times.Never);
+        }
+
+        [Fact]
+        public void TestServiceShouldThrowEntityNotFoundExceptionIfAlarmWatchIsNull()
+        {
+            //Given
+            var mockRepo = new Mock<IWatchRepository>();
+            var service = new WatchService(mockRepo.Object);
+
+            int alarmId = 1;
+            string watchId = "watch-id-1";
+
+            //When
+            mockRepo.Setup(mr => mr.ReadSubscriptionOfAlarmFromWatch(It.IsAny<int>(), It.IsAny<string>())).Returns(It.IsAny<AlarmWatch>());
+            
+            //Then
+            Assert.Throws<EntityNotFoundException>(() => service.GetSubscriptionOfAlarmFromWatch(alarmId, watchId));
         }
     }
 }
