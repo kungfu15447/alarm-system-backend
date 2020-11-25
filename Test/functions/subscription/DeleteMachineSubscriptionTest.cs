@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
+using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Functions.Subscription.DeleteMachineSubscription;
 using AlarmSystem.Test.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -28,8 +29,8 @@ namespace AlarmSystem.Test.Functions.Subscription
             var watchService = new Mock<IWatchService>();
 
             //When
-            watchService.Setup(ws => ws.DeleteMachineSubscriptionFromWatch(It.IsAny<AlarmSystem.Core.Entity.Dto.MachineWatch>()));
-            watchService.Setup(ws => ws.GetMachineSubcriptionOfMachineFromWatch(It.IsAny<string>(), It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.MachineWatch>());
+            watchService.Setup(ws => ws.DeleteMachineSubscriptionFromWatch(It.IsAny<MachineWatch>()));
+            watchService.Setup(ws => ws.GetMachineSubcriptionOfMachineFromWatch(It.IsAny<string>(), It.IsAny<string>())).Returns(It.IsAny<MachineWatch>());
 
             var res = (OkResult) await new DeleteMachineSubscription(watchService.Object).Run(req, logger);
         
@@ -51,13 +52,13 @@ namespace AlarmSystem.Test.Functions.Subscription
             var watchService = new Mock<IWatchService>();
 
             //When
-            watchService.Setup(ws => ws.DeleteMachineSubscriptionFromWatch(It.IsAny<AlarmSystem.Core.Entity.Dto.MachineWatch>()));
-            watchService.Setup(ws => ws.GetMachineSubcriptionOfMachineFromWatch(It.IsAny<string>(), It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.Dto.MachineWatch>());
+            watchService.Setup(ws => ws.DeleteMachineSubscriptionFromWatch(It.IsAny<MachineWatch>()));
+            watchService.Setup(ws => ws.GetMachineSubcriptionOfMachineFromWatch(It.IsAny<string>(), It.IsAny<string>())).Returns(It.IsAny<MachineWatch>());
 
             await new DeleteMachineSubscription(watchService.Object).Run(req, logger);
         
             //Then
-            watchService.Verify(ws => ws.DeleteMachineSubscriptionFromWatch(It.IsAny<AlarmSystem.Core.Entity.Dto.MachineWatch>()), Times.Once);
+            watchService.Verify(ws => ws.DeleteMachineSubscriptionFromWatch(It.IsAny<MachineWatch>()), Times.Once);
             watchService.Verify(ws => ws.GetMachineSubcriptionOfMachineFromWatch(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
 
@@ -75,14 +76,14 @@ namespace AlarmSystem.Test.Functions.Subscription
             var watchService = new Mock<IWatchService>();
 
             //When
-            watchService.Setup(ws => ws.DeleteMachineSubscriptionFromWatch(It.IsAny<AlarmSystem.Core.Entity.Dto.MachineWatch>()));
+            watchService.Setup(ws => ws.DeleteMachineSubscriptionFromWatch(It.IsAny<MachineWatch>()));
             watchService.Setup(ws => ws.GetMachineSubcriptionOfMachineFromWatch(It.IsAny<string>(), It.IsAny<string>())).Throws<InvalidDataException>();
 
             var res = (BadRequestObjectResult) await new DeleteMachineSubscription(watchService.Object).Run(req, logger);
         
             //Then
             Assert.IsType<BadRequestObjectResult>(res);
-            watchService.Verify(ws => ws.DeleteMachineSubscriptionFromWatch(It.IsAny<AlarmSystem.Core.Entity.Dto.MachineWatch>()), Times.Never);
+            watchService.Verify(ws => ws.DeleteMachineSubscriptionFromWatch(It.IsAny<MachineWatch>()), Times.Never);
         }
     }
 }
