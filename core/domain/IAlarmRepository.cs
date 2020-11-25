@@ -10,6 +10,6 @@ namespace AlarmSystem.Core.Domain
         Alarm ReadAlarmById(int id);
 		void CreateAlarm(Alarm alarm);
         List<Alarm> GetAllAlarms();
-        List<AlarmWithSubscription> ReadAllMachinesWithSubs(string watchId);
+        List<AlarmWithSubscription> ReadAllAlarmsWithSubs(string watchId);
 	}
 }

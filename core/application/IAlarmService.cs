@@ -11,6 +11,6 @@ namespace AlarmSystem.Core.Application
         Alarm GetAlarmById(int id);
 		void CreateAlarm(Alarm alarm);
         List<Alarm> GetAllAlarms();
-        List<AlarmWithSubscription> GetAllMachinesWithSubs(string watchId);
+        List<AlarmWithSubscription> GetAllAlarmsWithSubs(string watchId);
 	}
 }

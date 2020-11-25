@@ -39,7 +39,7 @@ namespace AlarmSystem.Infrastructure.Repositories
         {
             return _ctx.Alarms.ToList();
         }
-        public List<AlarmWithSubscription> ReadAllMachinesWithSubs(string watchId)
+        public List<AlarmWithSubscription> ReadAllAlarmsWithSubs(string watchId)
         {            
             return _ctx.Alarms.Select(a => new AlarmWithSubscription{
                 AlarmId = a.AlarmId,

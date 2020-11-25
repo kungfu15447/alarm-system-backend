@@ -47,9 +47,9 @@ namespace AlarmSystem.Core.Application.Implementation
         {
             return _alarmRepo.GetAllAlarms();
         }
-        public List<AlarmWithSubscription> GetAllMachinesWithSubs(string watchId)
+        public List<AlarmWithSubscription> GetAllAlarmsWithSubs(string watchId)
         {
-            return _alarmRepo.ReadAllMachinesWithSubs(watchId);
+            return _alarmRepo.ReadAllAlarmsWithSubs(watchId);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace functions.alarm
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "alarms/{watchId}")] HttpRequest req,
             ILogger log, string watchId)
         {
-            List<AlarmWithSubscription> machinesWithSubs = _alarmService.GetAllMachinesWithSubs(watchId);
+            List<AlarmWithSubscription> machinesWithSubs = _alarmService.GetAllAlarmsWithSubs(watchId);
 
             if (machinesWithSubs.Count == 0) {
                 return new NoContentResult();
