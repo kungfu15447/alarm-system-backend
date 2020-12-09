@@ -1,14 +1,15 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
-using core.entity.dto;
+using AlarmSystem.Core.Entity.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 
-namespace functions.alarm
+namespace AlarmSystem.Functions.Alarm
 {
     public class GetAlarmsWithSubs
     {
@@ -23,6 +24,7 @@ namespace functions.alarm
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "alarms/{watchId}")] HttpRequest req,
             ILogger log, string watchId)
         {
+            try{
             List<AlarmWithSubscription> machinesWithSubs = _alarmService.GetAllAlarmsWithSubs(watchId);
 
             if (machinesWithSubs.Count == 0) {
@@ -30,6 +32,11 @@ namespace functions.alarm
             }
 
             return new OkObjectResult(machinesWithSubs);
+            }catch(InvalidDataException e)
+            {
+                return new BadRequestObjectResult(e.Message);
+            }
+            
         }
     }
 }

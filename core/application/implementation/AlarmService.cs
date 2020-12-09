@@ -4,7 +4,7 @@ using AlarmSystem.Core.Domain;
 using System.Collections.Generic;
 using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Core.Application.Exception;
-using core.entity.dto;
+using AlarmSystem.Core.Entity.Dto;
 
 namespace AlarmSystem.Core.Application.Implementation
 {
@@ -49,6 +49,9 @@ namespace AlarmSystem.Core.Application.Implementation
         }
         public List<AlarmWithSubscription> GetAllAlarmsWithSubs(string watchId)
         {
+            if (string.IsNullOrEmpty(watchId)) {
+                throw new InvalidDataException("Watch id cannot be empty or non existent! Please include watch id");
+            }
             return _alarmRepo.ReadAllAlarmsWithSubs(watchId);
         }
     }

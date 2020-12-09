@@ -6,7 +6,7 @@ using System.Linq;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Infrastructure;
-using core.entity.dto;
+using AlarmSystem.Core.Entity.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace AlarmSystem.Infrastructure.Repositories
