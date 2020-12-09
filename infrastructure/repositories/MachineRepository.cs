@@ -14,7 +14,6 @@ namespace AlarmSystem.Infrastructure.Repositories
         {
             _ctx = ctx;
         }
-
         public void CreateMachine(Machine machine)
         {
             _ctx.Machines.Add(machine);

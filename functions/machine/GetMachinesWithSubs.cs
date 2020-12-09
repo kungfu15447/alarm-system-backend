@@ -8,7 +8,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 
-namespace functions.machine
+namespace AlarmSystem.Functions.Machine
 {
     public class GetMachinesWithSubs
     {

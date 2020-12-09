@@ -1,11 +1,14 @@
 using System;
+using System.Collections.Generic;
 using AlarmSystem.Core.Application;
 using AlarmSystem.Core.Application.Implementation;
 using AlarmSystem.Core.Domain;
 using AlarmSystem.Functions.Notification.NotificationSettings;
 using AlarmSystem.Infrastructure;
+using AlarmSystem.Infrastructure.Helpers;
 using AlarmSystem.Infrastructure.Repositories;
 using infrastructure.repositories;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,6 +40,16 @@ namespace AlarmSystem.Functions {
 
             builder.Services.AddScoped<IWatchService, WatchService>();
             builder.Services.AddScoped<IWatchRepository, WatchRepository>();
+
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+            builder.Services.AddSingleton<IAuthenticationHelper, AuthenticationHelper>(b => {
+                string secretKey = Environment.GetEnvironmentVariable("SecretToken");
+                return new AuthenticationHelper(System.Text.Encoding.UTF32.GetBytes(secretKey));
+            });
         }
+
     }
 }

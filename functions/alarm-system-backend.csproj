@@ -3,6 +3,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
     <RootNamespace>alarm_system_backend</RootNamespace>
+    <_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.7"/>
@@ -12,6 +13,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.1"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.1"/>
     <PackageReference Include="Microsoft.Azure.NotificationHubs" Version="4.1.0"/>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

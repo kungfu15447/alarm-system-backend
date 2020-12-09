@@ -1,6 +1,8 @@
 using AlarmSystem.Core.Entity.Dto;
 using AlarmSystem.Core.Entity.DB;
 using Microsoft.EntityFrameworkCore;
+using Core.Entity.DB;
+using System;
 
 namespace AlarmSystem.Infrastructure {
     public class SystemContext : DbContext {
@@ -14,6 +16,10 @@ namespace AlarmSystem.Infrastructure {
 
             modelBuilder.Entity<Machine>()
                 .Property(m => m.MachineId)
+                .HasColumnName("Id");
+            
+            modelBuilder.Entity<User>()
+                .Property(u => u.UserId)
                 .HasColumnName("Id");
 
             modelBuilder.Entity<AlarmLog>()
@@ -43,5 +49,6 @@ namespace AlarmSystem.Infrastructure {
         public DbSet<AlarmLog> AlarmLogs { get; set; }
         public DbSet<AlarmWatch> AlarmWatch { get; set; }
         public DbSet<MachineWatch> MachineWatch { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
