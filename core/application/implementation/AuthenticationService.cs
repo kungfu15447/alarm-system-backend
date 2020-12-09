@@ -7,12 +7,10 @@ namespace AlarmSystem.Core.Application.Implementation
 {
     public class AuthenticationService : IAuthenticationService
     {
-        public IUserRepository _userRepo;
         public IAuthenticationHelper _authenticationHelper;
-        public AuthenticationService(IAuthenticationHelper authenticationHelper, IUserRepository userRepository)
+        public AuthenticationService(IAuthenticationHelper authenticationHelper)
         {
             _authenticationHelper = authenticationHelper;
-            _userRepo = userRepository;
         }
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
