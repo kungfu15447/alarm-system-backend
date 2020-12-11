@@ -1,4 +1,4 @@
-using Core.Entity.DB;
+using AlarmSystem.Core.Entity.DB;
 using Core.Entity.Dto.Authentication;
 
 namespace AlarmSystem.Core.Application

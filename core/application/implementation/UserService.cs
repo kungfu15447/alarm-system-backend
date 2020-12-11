@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using AlarmSystem.Core.Domain;
+using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Core.Entity.Dto;
-using Core.Entity.DB;
 
 namespace AlarmSystem.Core.Application.Implementation
 {
@@ -17,7 +18,7 @@ namespace AlarmSystem.Core.Application.Implementation
         }
         public void CreateUser(UserToCreate user)
         {
-            
+            if(user != null){
                 if(_userRepo.GetUserByEmail(user.Email) == null)
                 {
                 byte[] passwordHash;
@@ -31,22 +32,35 @@ namespace AlarmSystem.Core.Application.Implementation
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt 
                 });
+                }
+            }
+            else{
+                throw new InvalidDataException("User id cannot be empty or non existent! Please include a user id");
             }
         }
 
+    
+
         public User GetUserByEmail(string email)
         {
-            return _userRepo.GetUserByEmail(email);
-        }
-
-        public User GetUserByGuid(string guid)
-        {
-            return _userRepo.GetUserByGuid(guid);
+            if(!string.IsNullOrEmpty(email))
+            {
+                return _userRepo.GetUserByEmail(email);
+            }
+            else 
+            {
+                throw new InvalidDataException("Email cannot be empty or non existent! Please include a email");
+            }
         }
 
         public User GetUserByName(string name)
         {
-            return _userRepo.GetUserByName(name);
+            if(!string.IsNullOrEmpty(name)){
+                return _userRepo.GetUserByName(name);
+            }else {
+                throw new InvalidDataException("Email cannot be empty or non existent! Please include a email");
+            }
+            
         }
 
         public List<User> GetUsers()

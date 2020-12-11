@@ -1,8 +1,8 @@
 using AlarmSystem.Core.Entity.Dto;
 using AlarmSystem.Core.Entity.DB;
 using Microsoft.EntityFrameworkCore;
-using Core.Entity.DB;
 using System;
+using AlarmSystem.Core.Entity.DB;
 
 namespace AlarmSystem.Infrastructure {
     public class SystemContext : DbContext {
