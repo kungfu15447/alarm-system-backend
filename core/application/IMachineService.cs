@@ -6,7 +6,7 @@ namespace AlarmSystem.Core.Application
 {
     public interface IMachineService
     {
-        void CreateMachine();
+        void CreateMachine(Machine machine);
         List<Machine> GetMachines();
         List<MachineWithSubscription> GetAllMachinesWithSubs(string watchId);
         Machine GetMachineById(string id);
