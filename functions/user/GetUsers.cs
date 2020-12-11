@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
-using Core.Entity.DB;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -10,7 +9,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace functions.user
+namespace AlarmSystem.Functions.User
 {
     public class GetUsers
     {
@@ -24,7 +23,7 @@ namespace functions.user
            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "users")] HttpRequest req,
             ILogger log)
             {
-                List<User> users = _userService.GetUsers();
+                List<AlarmSystem.Core.Entity.DB.User> users = _userService.GetUsers();
                 
             if (users.Count == 0) {
                 return new NoContentResult();

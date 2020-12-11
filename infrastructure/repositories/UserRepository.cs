@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AlarmSystem.Core.Domain;
-using Core.Entity.DB;
+using AlarmSystem.Core.Entity.DB;
 
 namespace AlarmSystem.Infrastructure.Repositories
 {

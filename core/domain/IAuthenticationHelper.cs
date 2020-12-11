@@ -1,4 +1,4 @@
-using Core.Entity.DB;
+using AlarmSystem.Core.Entity.DB;
 
 namespace AlarmSystem.Core.Domain
 {

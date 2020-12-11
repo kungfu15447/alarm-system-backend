@@ -1,7 +1,5 @@
-
 using AlarmSystem.Core.Domain;
-using Core.Entity.DB;
-using Core.Entity.Dto.Authentication;
+using AlarmSystem.Core.Entity.DB;
 
 namespace AlarmSystem.Core.Application.Implementation
 {

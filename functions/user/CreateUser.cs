@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AlarmSystem.Core.Application;
 using AlarmSystem.Core.Entity.DB;
 using AlarmSystem.Core.Entity.Dto;
-using Core.Entity.DB;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -11,8 +10,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace functions.user
-{
+namespace AlarmSystem.Functions.User{
     public class CreateUser
     {
         private IUserService _userService;

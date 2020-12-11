@@ -1,6 +1,6 @@
 using System;
 
-namespace Core.Entity.DB
+namespace AlarmSystem.Core.Entity.DB
 {
     public class User
     {
