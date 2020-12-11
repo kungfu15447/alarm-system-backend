@@ -24,7 +24,7 @@ namespace infrastructure.repositories
         public List<AlarmLog> GetAlarmLog()
         {
             return _ctx.AlarmLogs.Include(al => al.Alarm)
-                                 .Include(al => al.Machine).ToList();
+                                 .Include(al => al.Machine).OrderByDescending(al => al.Date).ToList();
         }
     }
 }
