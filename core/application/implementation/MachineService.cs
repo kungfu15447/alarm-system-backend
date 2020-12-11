@@ -15,11 +15,22 @@ namespace AlarmSystem.Core.Application.Implementation
         {
             _machineRepo = machineRepo;
         }
-        public void CreateMachine()
+        public void CreateMachine(Machine machine)
         {
-            Guid guid = Guid.NewGuid();
-            Machine machine = new Machine { MachineId = guid.ToString() };
-            _machineRepo.CreateMachine(machine);
+            if (machine != null) {
+                if (!String.IsNullOrEmpty(machine.Name) && !String.IsNullOrEmpty(machine.Type)) 
+                {
+                    Guid guid = Guid.NewGuid();
+                    machine.MachineId = guid.ToString();
+                    _machineRepo.CreateMachine(machine);
+                } 
+                else
+                {
+                    throw new InvalidDataException("Machine has invalid attributes! Attributes cannot be null or empty");
+                }
+            } else {
+                throw new InvalidDataException("Machine cannot be null!");
+            }
         }
 
         public Machine GetMachineById(string id)
