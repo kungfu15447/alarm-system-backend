@@ -31,10 +31,7 @@ namespace AlarmSystem.Functions.Notification
             _machineService = machineService;
             _alarmLogService = alarmLogService;
         }
-
-        //TODO Create alarm log
-        //TODO Test to see if function works
-        //TODO Optimize way to find all watches that needs a notification send
+        
         [FunctionName("SendAlert")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "notify")] HttpRequest req,
