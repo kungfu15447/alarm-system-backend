@@ -16,31 +16,75 @@ namespace AlarmSystem.Test.Functions.AlarmLog
         [Fact]
         public async void FunctionShouldCallAlarmLogServiceOnce() {
             //Given
-            var req = new HttpRequestBuilder().Build();
+            var token = "mocktoken";
+            var req = new HttpRequestBuilder().AuthHeader(token).Build();
             var alarmLogService = new Mock<IAlarmLogService>();
+            var authService = new Mock<IAuthenticationService>();
 
             //When
-            alarmLogService.Setup(ms => ms.GetAlarmLog());
+            authService.Setup(aus => aus.DecryptToken(It.IsAny<string>())).Returns(true);
+            alarmLogService.Setup(als => als.GetAlarmLog());
 
-            var res = await new GetAlarmLogs(alarmLogService.Object).Run(req, logger);
+            var res = await new GetAlarmLogs(alarmLogService.Object, authService.Object).Run(req, logger);
 
             //Then
             alarmLogService.Verify(ms => ms.GetAlarmLog(), Times.Once());
-            
         }
 
         [Fact]
         public async void FunctionShouldReturnOkObjectResult()
         {
             //Given
-            var req = new HttpRequestBuilder().Build();
+            var token = "mocktoken";
+            var req = new HttpRequestBuilder().AuthHeader(token).Build();
             var alarmLogService = new Mock<IAlarmLogService>();
+            var authService = new Mock<IAuthenticationService>();
 
             //When
-            var res = (OkObjectResult)await new GetAlarmLogs(alarmLogService.Object).Run(req, logger);
+            authService.Setup(aus => aus.DecryptToken(It.IsAny<string>())).Returns(true);
+            alarmLogService.Setup(als => als.GetAlarmLog());
+
+            var res = (OkObjectResult) await new GetAlarmLogs(alarmLogService.Object, authService.Object).Run(req, logger);
 
             //Then
             Assert.IsType<OkObjectResult>(res);
         }
+
+        [Fact]
+        public async void FunctionShouldReturnUnauthorisedResultWhenTokenCannotBeDecrypted(){
+            //Given
+            var token = "mocktoken";
+            var req = new HttpRequestBuilder().AuthHeader(token).Build();
+            var alarmLogService = new Mock<IAlarmLogService>();
+            var authService = new Mock<IAuthenticationService>();
+
+            //When
+            authService.Setup(aus => aus.DecryptToken(It.IsAny<string>())).Returns(false);
+            alarmLogService.Setup(als => als.GetAlarmLog());
+
+            var res = (UnauthorizedResult) await new GetAlarmLogs(alarmLogService.Object, authService.Object).Run(req, logger);
+
+            //Then
+            Assert.IsType<UnauthorizedResult>(res);
+        }
+
+        [Fact]
+        public async void FunctionShouldReturnUnauthorisedResultWhenNoTokenIsGiven(){
+            string token = null;
+            var req = new HttpRequestBuilder().AuthHeader(token).Build();
+            var alarmLogService = new Mock<IAlarmLogService>();
+            var authService = new Mock<IAuthenticationService>();
+
+            //When
+            authService.Setup(aus => aus.DecryptToken(It.IsAny<string>())).Returns(false);
+            alarmLogService.Setup(als => als.GetAlarmLog());
+
+            var res = (UnauthorizedResult) await new GetAlarmLogs(alarmLogService.Object, authService.Object).Run(req, logger);
+
+            //Then
+            Assert.IsType<UnauthorizedResult>(res);
+        }
+
+
     }
 }

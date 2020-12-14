@@ -9,6 +9,8 @@ namespace AlarmSystem.Test.Utils {
     public class HttpRequestBuilder {
         private Dictionary<string, StringValues> query;
         private object body;
+        private string authHeader;
+        private string badAuthHeader;
 
         public HttpRequestBuilder() {}
 
@@ -25,10 +27,18 @@ namespace AlarmSystem.Test.Utils {
             return this;
         }
 
+        public HttpRequestBuilder AuthHeader(string authHeader) {
+            this.authHeader = authHeader;
+            return this;
+        }
+
         public HttpRequest Build() {
 
             var req = TestFactory.CreateHttpRequest();
-
+            
+            if (authHeader != null) {
+                req.Headers.Add("Authorization", $"Bearer {authHeader}");
+            }
             if (query != null) {
                 req.Query = new QueryCollection(query);
             }
