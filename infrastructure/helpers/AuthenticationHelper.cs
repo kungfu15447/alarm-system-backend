@@ -72,7 +72,7 @@ namespace AlarmSystem.Infrastructure.Helpers
         {
             var decrypting = new JwtSecurityTokenHandler();
 
-            //var newVariable = decrypting.ReadToken(token);
+            
             try{
             SecurityToken decryptedToken;
             decrypting.ValidateToken(token, new TokenValidationParameters {
