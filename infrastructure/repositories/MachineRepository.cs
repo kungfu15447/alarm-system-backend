@@ -29,7 +29,10 @@ namespace AlarmSystem.Infrastructure.Repositories
         {
             return _ctx.Machines.Select(m => new MachineWithSubscription{
                 MachineId = m.MachineId,
+                Name = m.Name,
+                Type = m.Type,
                 IsSubscribed = _ctx.MachineWatch.Any(mw => mw.Machine.MachineId == m.MachineId && mw.WatchId == watchId)
+
             }).ToList();
         }
         public Machine ReadMachineById(string id)
