@@ -9,6 +9,7 @@ using System.IO;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using AlarmSystem.Core.Entity.DB;
+using System.Linq;
 
 namespace AlarmSystem.Infrastructure.Helpers
 {
@@ -63,6 +64,29 @@ namespace AlarmSystem.Infrastructure.Helpers
                 {
                     if (computedHash[i] != storedHash[i]) return false;
                 }
+            }
+            return true;
+        }
+
+        public bool DecryptToken(string token)
+        {
+            var decrypting = new JwtSecurityTokenHandler();
+
+            
+            try{
+            SecurityToken decryptedToken;
+            decrypting.ValidateToken(token, new TokenValidationParameters {
+                ValidateIssuerSigningKey = true,
+                ValidateIssuer = false,
+                ValidateAudience = false,
+			    ValidIssuer = null,
+			    ValidAudience = null,
+			    IssuerSigningKey = new SymmetricSecurityKey(_secretBytes)
+            }, out decryptedToken);
+            var validTo = decryptedToken.ValidTo;
+            } catch
+            {
+                return false;
             }
             return true;
         }

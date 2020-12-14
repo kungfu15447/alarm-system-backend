@@ -13,17 +13,30 @@ namespace AlarmSystem.Functions.AlarmLog
     public class GetAlarmLogs
     {
         private IAlarmLogService _alarmService;
-        public GetAlarmLogs(IAlarmLogService alarmService) 
+        private IAuthenticationService _authService;
+        public GetAlarmLogs(IAlarmLogService alarmService, IAuthenticationService authenticationService) 
         {
             _alarmService = alarmService;
+            _authService = authenticationService;
         }
 
         [FunctionName("GetAlarmLog")]
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "alarmlog")] HttpRequest req,
             ILogger log) 
         {
-            List<AlarmSystem.Core.Entity.DB.AlarmLog> alarmLogs = _alarmService.GetAlarmLog();
-            return new OkObjectResult(alarmLogs);
+            Microsoft.Extensions.Primitives.StringValues value; 
+            var headers = req.Headers.TryGetValue("Authorization", out value);
+            if(headers){
+                var bearer = value[0];
+                var token = bearer.Split(" ")[1];
+                var decryptedToken = _authService.DecryptToken(token);
+                if(decryptedToken){
+                    List<AlarmSystem.Core.Entity.DB.AlarmLog> alarmLogs = _alarmService.GetAlarmLog();
+                    return new OkObjectResult(alarmLogs);
+                }
+                return new UnauthorizedResult();
+            }
+            return new UnauthorizedResult();
         }
     }
 }
