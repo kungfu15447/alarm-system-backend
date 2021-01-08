@@ -32,6 +32,18 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var notificationHub = new Mock<INotificationHubClient>();
 
             var body = new { MachinasdfeId = "test-id-1", AlarmCode = 42 };
+            var machine = new AlarmSystem.Core.Entity.DB.Machine 
+            {
+                MachineId = "machine-id-test",
+                Type = "machine-type-test",
+                Name = "machine-name-test"
+            };
+            var alarm = new AlarmSystem.Core.Entity.DB.Alarm
+            {
+                AlarmId = 1,
+                Code = 1,
+                Description = "alarm-description-test"
+            };
 
             var req = new HttpRequestBuilder().Body(body).Build();
 
@@ -39,8 +51,8 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var machineSubs = new List<MachineWatch>() { new MachineWatch { Machine = new Core.Entity.DB.Machine { MachineId = "test-id-1" }, WatchId = "watch-test-id-1" } };
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Alarm>());
-            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Machine>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(alarm);
+            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(machine);
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
@@ -64,6 +76,18 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var notificationHub = new Mock<INotificationHubClient>();
 
             var body = new { MachineId = "test-id-1", AlarmCode = 42 };
+            var machine = new AlarmSystem.Core.Entity.DB.Machine 
+            {
+                MachineId = "machine-id-test",
+                Type = "machine-type-test",
+                Name = "machine-name-test"
+            };
+            var alarm = new AlarmSystem.Core.Entity.DB.Alarm
+            {
+                AlarmId = 1,
+                Code = 1,
+                Description = "alarm-description-test"
+            };
 
             var req = new HttpRequestBuilder().Body(body).Build();
 
@@ -71,8 +95,8 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var machineSubs = new List<MachineWatch>();
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Alarm>());
-            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Machine>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(alarm);
+            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(machine);
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
@@ -96,6 +120,18 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var notificationHub = new Mock<INotificationHubClient>();
 
             var body = new { MachineId = "test-id-1", AlarmCode = 42 };
+            var machine = new AlarmSystem.Core.Entity.DB.Machine 
+            {
+                MachineId = "machine-id-test",
+                Type = "machine-type-test",
+                Name = "machine-name-test"
+            };
+            var alarm = new AlarmSystem.Core.Entity.DB.Alarm
+            {
+                AlarmId = 1,
+                Code = 1,
+                Description = "alarm-description-test"
+            };
 
             var req = new HttpRequestBuilder().Body(body).Build();
 
@@ -103,8 +139,8 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var machineSubs = new List<MachineWatch>();
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Alarm>());
-            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Machine>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(alarm);
+            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(machine);
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
@@ -129,6 +165,18 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var notificationHub = new Mock<INotificationHubClient>();
 
             var body = new { MachineId = "test-id-1", AlarmCode = 42 };
+            var machine = new AlarmSystem.Core.Entity.DB.Machine 
+            {
+                MachineId = "machine-id-test",
+                Type = "machine-type-test",
+                Name = "machine-name-test"
+            };
+            var alarm = new AlarmSystem.Core.Entity.DB.Alarm
+            {
+                AlarmId = 1,
+                Code = 1,
+                Description = "alarm-description-test"
+            };
 
             var req = new HttpRequestBuilder().Body(body).Build();
 
@@ -136,8 +184,8 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var machineSubs = new List<MachineWatch>();
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Alarm>());
-            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Machine>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(alarm);
+            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(machine);
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
@@ -161,14 +209,26 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var notificationHub = new Mock<INotificationHubClient>();
 
             var body = new { MachineId = "test-id-1", AlarmCode = 42 };
+            var machine = new AlarmSystem.Core.Entity.DB.Machine 
+            {
+                MachineId = "machine-id-test",
+                Type = "machine-type-test",
+                Name = "machine-name-test"
+            };
+            var alarm = new AlarmSystem.Core.Entity.DB.Alarm
+            {
+                AlarmId = 1,
+                Code = 1,
+                Description = "alarm-description-test"
+            };
 
             var req = new HttpRequestBuilder().Body(body).Build();
 
             var alarmSubs = new List<AlarmWatch>();
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Alarm>());
-            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Machine>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(alarm);
+            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(machine);
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Throws<InvalidDataException>();
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
@@ -193,14 +253,26 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var notificationHub = new Mock<INotificationHubClient>();
 
             var body = new { MachineId = "test-id-1", AlarmCode = 42 };
+            var machine = new AlarmSystem.Core.Entity.DB.Machine 
+            {
+                MachineId = "machine-id-test",
+                Type = "machine-type-test",
+                Name = "machine-name-test"
+            };
+            var alarm = new AlarmSystem.Core.Entity.DB.Alarm
+            {
+                AlarmId = 1,
+                Code = 1,
+                Description = "alarm-description-test"
+            };
 
             var req = new HttpRequestBuilder().Body(body).Build();
 
             var alarmSubs = new List<AlarmWatch>();
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Alarm>());
-            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Machine>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(alarm);
+            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(machine);
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Throws<InvalidDataException>();
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
@@ -224,6 +296,12 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var notificationHub = new Mock<INotificationHubClient>();
 
             var body = new { MachineId = "test-id-1", AlarmCode = 42 };
+            var machine = new AlarmSystem.Core.Entity.DB.Machine 
+            {
+                MachineId = "machine-id-test",
+                Type = "machine-type-test",
+                Name = "machine-name-test"
+            };
 
             var req = new HttpRequestBuilder().Body(body).Build();
 
@@ -232,7 +310,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
 
             //When
             alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Throws<EntityNotFoundException>();
-            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Machine>());
+            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(machine);
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
@@ -257,6 +335,12 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var notificationHub = new Mock<INotificationHubClient>();
 
             var body = new { MachineId = "test-id-1", AlarmCode = 42 };
+            var machine = new AlarmSystem.Core.Entity.DB.Machine 
+            {
+                MachineId = "machine-id-test",
+                Type = "machine-type-test",
+                Name = "machine-name-test"
+            };
 
             var req = new HttpRequestBuilder().Body(body).Build();
 
@@ -265,7 +349,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
 
             //When
             alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Throws<EntityNotFoundException>();
-            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Machine>());
+            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(machine);
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);
             notificationHub.Setup(nh => nh.SendDirectNotificationAsync(It.IsAny<Notification>(), It.IsAny<string>()));
@@ -289,6 +373,18 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var notificationHub = new Mock<INotificationHubClient>();
 
             var body = new { MachineId = "test-id-1", AlarmCode = 42 };
+            var machine = new AlarmSystem.Core.Entity.DB.Machine 
+            {
+                MachineId = "machine-id-test",
+                Type = "machine-type-test",
+                Name = "machine-name-test"
+            };
+            var alarm = new AlarmSystem.Core.Entity.DB.Alarm
+            {
+                AlarmId = 1,
+                Code = 1,
+                Description = "alarm-description-test"
+            };
 
             var req = new HttpRequestBuilder().Body(body).Build();
 
@@ -296,8 +392,8 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var machineSubs = new List<MachineWatch>();
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Alarm>());
-            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Machine>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(alarm);
+            machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Returns(machine);
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);
             alarmLogService.Setup(alls => alls.CreateAlarmLog(It.IsAny<AlarmSystem.Core.Entity.DB.AlarmLog>()));
@@ -322,6 +418,12 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var notificationHub = new Mock<INotificationHubClient>();
 
             var body = new { MachineId = "test-id-1", AlarmCode = 42 };
+            var alarm = new AlarmSystem.Core.Entity.DB.Alarm
+            {
+                AlarmId = 1,
+                Code = 1,
+                Description = "alarm-description-test"
+            };
 
             var req = new HttpRequestBuilder().Body(body).Build();
 
@@ -329,7 +431,7 @@ namespace AlarmSystem.Test.Functions.Notifitcation
             var machineSubs = new List<MachineWatch>();
 
             //When
-            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(It.IsAny<AlarmSystem.Core.Entity.DB.Alarm>());
+            alarmService.Setup(als => als.GetAlarmByCode(It.IsAny<int>())).Returns(alarm);
             machineService.Setup(ms => ms.GetMachineById(It.IsAny<string>())).Throws<EntityNotFoundException>();
             watchService.Setup(ws => ws.GetAlarmSubscriptionsByAlarmCode(It.IsAny<int>())).Returns(alarmSubs);
             watchService.Setup(ws => ws.GetMachineSubscriptionsByMachine(It.IsAny<string>())).Returns(machineSubs);

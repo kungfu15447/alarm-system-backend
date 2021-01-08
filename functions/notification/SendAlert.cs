@@ -31,10 +31,7 @@ namespace AlarmSystem.Functions.Notification
             _machineService = machineService;
             _alarmLogService = alarmLogService;
         }
-
-        //TODO Create alarm log
-        //TODO Test to see if function works
-        //TODO Optimize way to find all watches that needs a notification send
+        
         [FunctionName("SendAlert")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "notify")] HttpRequest req,
@@ -45,10 +42,12 @@ namespace AlarmSystem.Functions.Notification
 
             List<string> watches = new List<string>();
 
+            AlarmSystem.Core.Entity.DB.AlarmLog alarmLog;
+
             try 
             {
                 watches = GetWatchesToNotify(sam);
-                CreateAlarmLog(sam);
+                alarmLog = CreateAlarmLog(sam);
             }
             catch(InvalidDataException e)
             {
@@ -62,7 +61,7 @@ namespace AlarmSystem.Functions.Notification
             string accessSignature = Environment.GetEnvironmentVariable("DefaultFullSharedAccessSignature");
             string hubName = Environment.GetEnvironmentVariable("NotificationHubName");
 
-            Microsoft.Azure.NotificationHubs.Notification nof = new FcmNotification(MakeJsonPayload(sam));
+            Microsoft.Azure.NotificationHubs.Notification nof = new FcmNotification(MakeJsonPayload(alarmLog));
 
             if (watches.Count == 0) {
                 return new NoContentResult();
@@ -75,9 +74,9 @@ namespace AlarmSystem.Functions.Notification
             return new OkResult();
         }
 
-        private string MakeJsonPayload(SendAlertModel sam)
+        private string MakeJsonPayload(AlarmSystem.Core.Entity.DB.AlarmLog al)
         {
-            string errorMessage = $"The machine {sam.MachineId} has error {sam.AlarmCode}!";
+            string errorMessage = $"Machine {al.Machine.Name}, {al.Machine.Type} has triggered alarm with code {al.Alarm.Code}";
             string jsonPayload = JsonConvert.SerializeObject(new {data = new { message = errorMessage } });
             return jsonPayload;
         }
@@ -107,7 +106,7 @@ namespace AlarmSystem.Functions.Notification
             return watches;
         }
 
-        private void CreateAlarmLog(SendAlertModel sam)
+        private AlarmSystem.Core.Entity.DB.AlarmLog CreateAlarmLog(SendAlertModel sam)
         {
             AlarmSystem.Core.Entity.DB.Alarm alarm = _alarmService.GetAlarmByCode(sam.AlarmCode);
             AlarmSystem.Core.Entity.DB.Machine machine = _machineService.GetMachineById(sam.MachineId);
@@ -119,6 +118,8 @@ namespace AlarmSystem.Functions.Notification
             };
 
             _alarmLogService.CreateAlarmLog(al);
+
+            return al;
         }
     }
 }
